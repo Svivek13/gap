@@ -1,0 +1,60 @@
+<mjml>
+  <mj-body background-color="#d6dde5">
+    <mj-section padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-image src="https://www.tredence.com/wp-content/uploads/2021/05/logo.png" alt="Tredence logo" align="center" border="none" width="182px" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-image src="https://www.tredence.com/wp-content/uploads/2021/05/job-completion-email-01.png" alt="job completion" align="center" border="none" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="20px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="10px" padding-top="10px">
+          <p>Hi {{firstName}},</p>
+          <p>	Your job on ML Works has been {{ statusDescription}}. Please log in to your account for the next steps.
+</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff">
+      <mj-column>
+        <mj-table>
+          <tr style="border:1px solid #e1e1e1;text-align:left;padding:15px 0; font-family: calibri, sans-serif">
+            <th width="16.66%" height="40" align="center" style="padding: 0 0 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">JOB ID</th>
+            <th width="16.66%" height="40" align="center" style="padding: 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">JOB TYPE</th>
+            <th width="16.66%" height="40" align="center" style="padding: 0 0 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">START TIME</th>
+            <th width="16.66%" height="40" align="center" style="padding: 0 0 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">STATUS</th>
+            <th width="16.66%" height="40" align="center" style="padding: 0 0 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">ERROR</th>
+            <th width="16.66%"  height="40" align="center" style="padding: 0 0 0 0; background-color: #f17f21; color: #fff; font-size: 13px; border:1px solid #e1e1e1;">RUN TIME</th>
+          </tr>
+          <tr style="border:1px solid #e1e1e1;text-align:left;padding:15px 0; font-family: calibri, sans-serif">
+            <td width="16.66%" height="auto" align="center" style="padding: 0 5px 0 5px; font-size:12px; border:1px solid #e1e1e1;">{{ jobId }}</td>
+            <td width="16.66%" height="auto" align="center" style="padding: 0 0; font-size:12px; border:1px solid #e1e1e1;"> {{ jobType }}</td>
+            <td width="16.66%" height="auto" align="center" style="padding: 0 5px 0 5px; font-size:12px; border:1px solid #e1e1e1;">{{ startTime }}</td>
+            <td width="16.66%" height="auto" align="center" style="padding: 0 0 0 0; font-size:12px; border:1px solid #e1e1e1;">{{ status }}</td>
+            <td width="16.66%" height="auto" align="center" style="padding: 0 5px 0 5px; font-size:12px; border:1px solid #e1e1e1;">{{errorMessage}}</td>
+            <td width="16.66%" height="auto" align="center" style="padding: 0 0 0 0; font-size:12px; border:1px solid #e1e1e1;">{{ runTime }}</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-bottom="20px" padding-top="0px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="10px" padding-top="10px">
+          <p>Thank You,</p>
+          <p style="font-weight: bold;">ML Works Team</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%" vertical-align="middle">
+        <mj-text align="center" color="#000000" font-family="calibri, sans-serif" font-size="13px" padding-left="25px" padding-right="25px" padding-bottom="0px" padding-top="0">
+          <p>Tredence Inc, 1900 Camden Avenue, #66, San Jose, CA 95124, (+1) 408-819-2336 / (+1) 408-516-9074</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

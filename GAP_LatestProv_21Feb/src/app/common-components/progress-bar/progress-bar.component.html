@@ -1,0 +1,15 @@
+<div class="upload">
+    <div class="upload-progress">
+        <div>
+            <mat-progress-bar class="upload-progress-elapsed" mode="determinate" [value]="value" [name]=fileName></mat-progress-bar>
+        </div>
+    </div>
+    <div>
+        <span class="upload-text">{{value}}%</span>
+        <span *ngIf="name !== 'model'" class="view-icon" (click)="popupOpen(fileName)">View</span>
+        <!-- <mat-icon style="vertical-align: middle; cursor: not-allowed;">cloud_download</mat-icon> -->
+    </div>
+    <!-- <div style="display: inline-block"> -->
+    <!-- <a style="color: #807b77; text-decoration: underline; cursor: pointer;"></a> -->
+    <!-- </div> -->
+</div>

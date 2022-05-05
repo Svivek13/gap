@@ -1,0 +1,68 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded" style="height: 17vw;">
+                <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Avg. Daily Bookings</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value">{{overallBookings}}</h4>
+                    </div>
+                    <div class="overview-row">
+                        <p>On an average {{overallBookings}} bookings are registered in the company’s application
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Rentals by Season</h4>
+                        <p class="description-chart">Bookings surge in the Summer season and drop in the Winter which is natural for a Northern Hemisphere geography</p>
+                    </div>
+                    <app-line-chart *ngIf="seasonChartReady" lineChartName="buTemps" [lineChartData]="seasonChartData" [lineChartLabels]="seasonChartLabels" xLabel="Season" yLabel="No. of Bookings"></app-line-chart>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="description" *ngIf="seasonChartReady">
+            <p>Bookings surge in the Summer season and drop in the Winter which is natural for a Northern Hemisphere geography</p>
+        </div> -->
+    </div>
+
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget chartrow">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Rentals by Type of Day</h4>
+                        <p>Most of the bookings come on a working day indicating that daily commuters going to work are a significant share of the customer base</p>
+                    </div>
+                    <br>
+                    <app-bar-chart *ngIf="typeofDayChartReady" [barChartData]="typeofDayChartData" [barChartLabels]="typeofDayChartLabels" [barChartLegend]=false xLabel="Type of Day" yLabel="No. of Bookings" [barChartColors]="dayColors"></app-bar-chart>
+                    <!-- <div class="description" style="margin-left: 0;" *ngIf="typeofDayChartReady">
+                        <p>Most of the bookings come on a working day indicating that daily commuters going to work are a significant share of the customer base</p>
+                    </div> -->
+                </div>
+            </div>
+            <div class="widget chartrow">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Rentals by Weather Type</h4>
+                        <p>Bike rentals are an activity for a clear bright weather, the traction reduces drastically with harsher weather</p>
+                    </div>
+                    <br>
+                    <app-bar-chart *ngIf="weatherChartReady" [barChartData]="weatherTypeChartData" [barChartLabels]="weatherTypeChartLabels" [barChartLegend]=false xLabel="Weather Type" yLabel="No. of Bookings" [barChartColors]="weatherColors"></app-bar-chart>
+                    <!-- <div class="description" style="margin-left: 0;" *ngIf="weatherChartReady">
+                        <p>Bike rentals are an activity for a clear bright weather, the traction reduces drastically with harsher weather</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

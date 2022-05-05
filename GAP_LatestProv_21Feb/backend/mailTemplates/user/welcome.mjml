@@ -1,0 +1,56 @@
+<mjml>
+  <mj-body background-color="#eaf0f6">
+    <mj-section >
+      <mj-column >
+
+        <mj-image width="200px" padding-bottom="0px"src="https://mlworks.tredence.com/assets/img/logo_low.png"></mj-image>
+
+        
+
+      </mj-column>
+    </mj-section>
+    <mj-section padding="0px">
+      <mj-column>
+        <mj-image width="600px" padding="0px" src="https://mlworks.tredence.com/assets/img/thankyou-signup.png"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="white">
+      <mj-column >
+        
+        <mj-text font-size="20px" font-weight="bold" font-family="He" align="center" color="#23496d"><h2>You have completed the registration for the free trial of ML Works.</h2></mj-text>
+        <mj-text font-size="22px" align="center" font-family="Helvetica,Arial,sans-serif" color="#23496d">You can now access the ML Works platform!</mj-text>
+      </mj-column>
+      
+    </mj-section>
+    <mj-section padding="0px" background-color="white">
+      <mj-column padding="0px">
+        <mj-button background-color="#e37a36" href={{loginLink}} align="center" font-family="Arial, sans-serif" font-size="15px">
+          Return To ML Works Login Page</mj-button>
+      </mj-column>
+      
+      
+    </mj-section>
+    <mj-section background-color="white" padding="0px">
+      <mj-column>
+        <mj-divider border-color="lightgrey" border-width="1px" width="250px"></mj-divider>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="white">
+      <mj-column>
+        	<mj-text align="center" font-size="15px" color="#23496d" font-family="Arial, sans-serif">
+            We are more than happy to give you a free tour for any trouble accessing or understanding the platform. Would you like a demo of ML Works? You can click this <a href="https://calendly.com/sunil-ranganathan/30min?month=2021-04&utm_medium=email&_hsmi=116742849&_hsenc=p2ANqtz--m2ED1IZu-0Wqm4jLCBlmmEmIENmTYHzd3LVa0xaVyzY86nNNufKrK4-lP9Set7bwJyyXaEq7JILUBoyucFLZmge9TnQ&utm_content=116742849&utm_source=hs_automation" target="_blank">scheduling link</a> to choose a meeting time that works best for you.
+        </mj-text>
+        <mj-text align="center" font-size="15px" font-family="Arial, sans-serif" color="#23496d" >All the best,</mj-text>
+        <mj-text align="center" font-size="15px" font-family="Arial, sans-serift" font-weight="bold" padding-top="0px" color="#23496d">ML Works Team</mj-text>
+        <mj-text align="center" padding-top="0px" color="#00a4bd"><a href={{tredenceLink}}  target="_blank">Tredence Inc</a></mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" font-family="Arial, sans-serif" font-size="10px" color="#23496d" font-weight="normal">
+          Tredence Inc, 1900 Camden Avenue, #66, San Jose, CA 95124, (+1) 408-819-2336 / (+1) 408-516-9074
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

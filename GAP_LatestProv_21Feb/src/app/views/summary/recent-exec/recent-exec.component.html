@@ -1,0 +1,52 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="widget-holder" *ngIf="driftHolder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded" style="height: 18vw;">
+                <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Drift</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value" *ngIf="driftAvailable">{{ overallDrift }}</h4>
+                        <p *ngIf="!driftAvailable" style="font-size: 14px; margin-top: 4rem;"><strong>{{ errorMsg }}</strong></p>
+                    </div>
+                    <div class="overview-row" *ngIf="driftAvailable">
+                        <p>Data distribution between training and testing data for the last execution of {{projName}} is scored at {{ overallDrift }} on a scale of 0 to 100
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Drift Trend</h4>
+                        <p class="description-chart">Model health through the lens of data drift is tracked for the last 20 executions </p>
+                    </div>
+                    <app-line-chart *ngIf="driftChartReady" lineChartName="driftTrend" [lineChartData]="driftTrendData" [lineChartLabels]="driftTrendLabels"></app-line-chart>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="description" *ngIf="driftAvailable">
+            <p>Model health through the lens of data drift is tracked for the last 20 executions </p>
+        </div> -->
+    </div>
+
+    <div class="widget-holder" *ngIf="xaiHolder">
+        <div class="widget-holder-row">
+            <div class="widgetXai chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Global Explainability</h4>
+                        <p class="description-chart">Summary of the average contribution of each feature to the overall model prediction </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="xaiChartReady" chartName="xai" [datasets]="globalChartData" [labels]="globalChartLabels" [colors]="globalColors" xLabel="" yLabel="" [max]="max"></app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="ifXaiChartReady" [totalLength]="globalLength" (prevClickEvent)="showPrevFeatures($event)" (nextClickEvent)="showNextFeatures($event)"></app-chart-paginator>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

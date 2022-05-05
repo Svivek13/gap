@@ -1,0 +1,21 @@
+<div class="views">
+    <div class="formholder">
+        <div class="formholder-container">
+            <div class="formholder-helps ">
+                <!-- <h4>FAQs</h4> -->
+
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle class="expansion-panel" *ngFor="let faq of faqs">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{faq.question}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <p [innerHTML]="faq.answer"></p>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+            </div>
+        </div>
+    </div>
+</div>

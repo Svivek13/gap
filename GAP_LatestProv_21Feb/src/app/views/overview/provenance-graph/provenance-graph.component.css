@@ -1,0 +1,81 @@
+.close-button {
+    float: right;
+    top: -24px;
+    right: -24px;
+}
+
+.close-icon {
+    transition: 1s ease-in-out;
+}
+
+.close-icon:hover {
+    transform: rotate(180deg);
+}
+
+.projHeading {
+    text-align: center;
+    font-weight: bolder;
+    margin: auto;
+}
+
+
+
+
+
+
+/* graph */
+
+.graphcontainer {
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%;
+    height: 100%; */
+}
+
+
+/* .fa-check-circle-o {
+    color: '#7cd992';
+    margin-top: '5px'
+}
+
+.fa-customLoader {color: '#f39d3c'}
+
+.fa-ban {color: '#eb6060'} */
+
+/* ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: rgba(65, 65, 161, 0.54) !important;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: blue !important;
+} */
+
+::ng-deep svg {
+    overflow: visible !important;
+}
+
+::ng-deep .graphcontainer svg {
+    max-width: 100%;
+}
+
+/* ::ng-deep .mat-dialog-container {
+    background: linear-gradient(#1e1e2f, #1e1e24) !important;
+    color: white;
+} */
+
+.pipelineHeading {
+    text-align: center;
+    font-weight: bolder;
+    margin: auto;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 50%;
+}

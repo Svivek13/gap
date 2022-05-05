@@ -1,0 +1,25 @@
+<div class="featuresPaginator">
+
+    <div style="margin-right: 1rem;">
+        <button class="paginationButton" (click)="skipToFirst()" [disabled]="disableSkipFirst">
+  <span class="material-icons paginatorIcon"> skip_previous </span>
+  </button>
+        <button class="paginationButton" style="width: 25px; margin-left: -0.8rem;" [disabled]="disablePrev" (click)="showPrevValues()">
+<span class="material-icons paginatorIcon"> keyboard_arrow_left </span>
+</button>
+    </div>
+
+
+    <p class="pageText">Showing <strong> {{startIndex}} to {{lastIndex}} of {{totalLength}} </strong></p>
+
+
+    <div>
+        <button class="paginationButton" style="width: 25px;" [disabled]="disableNext" (click)="showNextValues()">
+<span class="material-icons paginatorIcon"> keyboard_arrow_right </span>
+</button>
+        <button class="paginationButton" (click)="skipToLast()" [disabled]="disableSkipLast">
+  <span class="material-icons paginatorIcon"> skip_next </span>
+</button>
+    </div>
+
+</div>

@@ -1,0 +1,132 @@
+<app-common-header></app-common-header>
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="module_body">
+    <form *ngIf="mSetupFlow" [formGroup]="setupFormGroup" (ngSubmit)="setupSubmit($event)">
+        <div class="formholder">
+            <div class="formholder-container">
+                <div class="formholder-inputs">
+                    <div style="display: flex;" class="interaction">
+                        <h4 style="margin-right: 1rem;">Create a Project</h4>
+                        <!-- <app-button style="margin-top: 0.3rem;" joyrideStep="step9" title="{{tours.step9.title}}" text="{{tours.step9.text}}" buttonLabel="Skip Setup" [color]="true" type="button" (click)="skipToOverview($event)"></app-button> -->
+                        <!-- <div class="input-group">
+                            <app-button buttonLabel="Create a Project" [color]="mSetupFlow" (click)="manualFlowChosen()"></app-button>
+                            <app-button buttonLabel="Pre-Loaded Project" [color]="acSetupFlow" (click)="fetchAutoConfigProjects($event)"></app-button>
+                        </div> -->
+                    </div>
+                    <div style="display: flex;">
+                        <p joyrideStep="step1" title="{{tours.step1.title}}" text="{{tours.step1.text}}" class="inputs">
+                            <mat-checkbox color="primary" formControlName="drift" class="checkbox" [checked]="drift.checked" (change)="driftOptions($event)">{{drift.label}}</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                            <mat-checkbox color="primary" formControlName="explainability" class="checkbox" [checked]="explainability.checked" (change)="explainOptions($event)">{{explainability.label}}</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                        </p>
+                    </div>
+                    <div style="color: red; margin-top: 0.5rem;" *ngIf="checkboxError">{{ checkboxErrorMsg }}</div>
+                    <div class="input-sections" style="margin-top: 1rem;">
+                        <h4 joyrideStep="step2" title="{{tours.step2.title}}" text="{{tours.step2.text}}">Project Details</h4>
+                        <div class="input-group">
+                            <label>Project Name *</label>
+                            <mat-form-field floatLabel="never">
+                                <input class="input" matInput type="text" name="projectName" value="" placeholder="Name" formControlName="projectName" [errorStateMatcher]="matcher" (blur)="projectNameBlurEvent($event)" />
+                                <mat-error style="margin-top: 0.5rem" *ngIf="projectNameFormControl?.hasError('required')">
+                                    Project name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <span style="color:red; margin-top: 0.5rem; font-size: 0.8rem;" *ngIf="showUniqueProjectError">{{ uniqueProjectErrorMsg }} </span>
+                        </div>
+                        <div class="input-group">
+                            <label>Project Description (Optional)</label>
+                            <mat-form-field floatLabel="never">
+                                <textarea class="textarea" matInput formControlName="projectDesc" value="" placeholder="Short description for project" name="projectDesc" rows="3" (blur)="descBlur($event)"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="formholder-helps hidden">
+                    <h4>Help?</h4>
+                    <p>There is no help with this one here at this point. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. </p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="formholder">
+            <div class="formholder-container">
+                <div class="formholder-inputs">
+                    <div class="input-sections">
+                        <h4 joyrideStep="step3" title="{{tours.step3.title}}" text="{{tours.step3.text}}">Configuration</h4>
+                        <div *ngIf="showModelFile" class="input-group">
+                            <label joyrideStep="step4" title="{{tours.step4.title}}" text="{{tours.step4.text}}">Choose Model Type *</label>
+                            <mat-form-field class="dropdown" [floatLabel]="'never'">
+                                <mat-select formControlName="dataModel" [errorStateMatcher]="matcher" (selectionChange)="modelSelectionChangeEvent($event)">
+                                    <mat-option *ngFor="let model of models" [value]="model.value">
+                                        {{model.viewValue}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error style="margin-top: 0.5rem" *ngIf="projectNameFormControl?.hasError('required')">
+                                    Data model is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="input-group" *ngIf="showTrainFile">
+                            <label joyrideStep="step5" title="{{tours.step5.title}}" text="{{tours.step5.text}}">Training Data * (Size &lt;4MB)</label>
+                            <input #inputFile type="file" value="" placeholder="" accept=".xlsx, .xls, .csv" formControlName="trainingFile" #itemName (change)="trainingUploadFile($event.target.files[0])" (click)='captureFileName($event); inputFile.value=null' />
+                            <div style="color: red; margin-top: 0.5rem;" *ngIf="trainingFileUploadError">{{ trainingFileUploadErrorMessage }}</div>
+                            <app-progress-bar *ngIf="trainingProgress" [name]="'train'" fileName='trainingFile' [value]="trainingProgress" [targetVariables]="targetVariables" [topTenRecords]="topTenRecords" [fileSelected]='fileSelected' [dxCase]="dxCase"></app-progress-bar>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Testing Data * (Size &lt;4MB)</label>
+                            <!-- (max 25 cols and 100k rows) -->
+                            <input type="file" value="" placeholder="" #testItemName formControlName="testFile" accept=".xlsx, .xls, .csv" (change)="testingUploadFile($event.target.files[0])" (click)='captureTestName($event); testItemName.value=null' />
+                            <div style="color: red; margin-top: 0.5rem;" *ngIf="testFileUploadError">{{ testFileUploadErrorMessage }}</div>
+                            <app-progress-bar *ngIf="testingProgress" [name]="'test'" fileName='testingFile' [value]="testingProgress" [targetVariables]="targetVariables" [topTenRecords]="topTenRecords" [dxCase]="dxCase"></app-progress-bar>
+                        </div>
+
+                        <div class="input-group" *ngIf="showModelFile">
+                            <label joyrideStep="step6" title="{{tours.step6.title}}" text="{{tours.step6.text}}">Model Object *</label>
+                            <!-- .pck, .pcl, and .db | for future reference -->
+                            <input #modelFile type="file" value="" placeholder="" accept=".pkl, .pickle" (change)="dataUploadFile($event.target.files[0])" (click)="modelFileClick($event); modelFile.value=null" formControlName="modelFile" />
+                            <div style="color: red; margin-top: 0.5rem;" *ngIf="modelFileUploadError">{{ modelFileUploadErrorMessage }}</div>
+                            <app-progress-bar *ngIf="dataProgress" [name]="'model'" [value]="dataProgress"></app-progress-bar>
+                        </div>
+                    </div>
+                </div>
+                <div class="formholder-helps">
+                    <h4>Help?</h4>
+                    <div class="help-text"><strong>Training/Testing Data - </strong>
+                        <ul>
+                            <li *ngFor="let item of items">{{item}}</li>
+                            <li>For details, <a class="link" (click)="trackHelp($event, 'preprocessed')">click here</a></li>
+                        </ul>
+                    </div>
+                    <p class="help-para"><strong>Model Object - </strong> Should be a serialized .pkl file for model object,
+                        <a class="link" (click)="trackHelp($event, 'model')">click here</a> for a tutorial
+                    </p>
+                    <p class="help-para"><strong>Drift - </strong> Shift between Training and Testing data distribution leads to inaccurate predictions considered as model degradation</p>
+                    <p><a class="alink" (click)="trackHelp($event, 'drift')">Click here</a> for more detail</p>
+                    <p class="help-para"><strong>Explainability - </strong> AI/ML models have traditionally been black box mechanisms. With the power of Shapley Values for identifying marginal contribution you can understand the model output for every prediction</p>
+                    <p><a class="alink" (click)="trackHelp($event, 'xai')">Click here</a> for more detail</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="formholder formend">
+            <div class="formholder-container">
+                <div class="formholder-inputs">
+                    <div class="input-sections">
+                        <div class="input-group">
+                            <div>
+                                <app-button buttonLabel="Execute" [color]="true" type="submit" [disabled]="showUniqueProjectError ? true: false"></app-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <app-common-footer></app-common-footer>
+</div>

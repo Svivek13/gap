@@ -1,0 +1,104 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="widget project-description">
+        <div class="details_wrapper">
+            <h2 class="capitalize">{{ name }}</h2>
+            <h4 *ngIf="modelType">Model: {{modelType}}</h4>
+            <p>{{desc}}</p>
+        </div>
+    </div>
+    <div class="widget opaque rounded">
+        <div class="details_wrapper">
+            <h4>Model File</h4>
+            <table *ngIf="modelType; modelElseBlock" mat-table [dataSource]="modelDataSource" class="data_table">
+                <ng-container matColumnDef="{{column.field}}" *ngFor="let column of modelColumns; let i = index;">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort">{{column.header}}</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p>{{element[column.field]}}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="control">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort right">Control</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p class="button">
+                            <button class="secondary" (click)="modelFileDownload($event, element)" [disabled]="modelDownloadText !== 'Download'">{{modelDownloadText}}</button>
+                        </p>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="modelProps"></tr>
+                <tr mat-row class="data_table" *matRowDef="let row; columns: modelProps;"></tr>
+            </table>
+            <h4 *ngIf="!modelType">Not Available</h4>
+        </div>
+    </div>
+    <div class="widget opaque rounded">
+        <div class="details_wrapper">
+            <h4>Training File</h4>
+            <table [ngClass]="{'hide': filesLength.train === 0 }" mat-table [dataSource]="trainDataSource" class="data_table">
+                <ng-container matColumnDef="{{column.field}}" *ngFor="let column of trainColumns; let i = index;">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort">{{column.header}}</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p>{{element[column.field]}}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="control">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort right">Control</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p class="button">
+                            <button class="primary" (click)="fetchTopTenRecords($event, element.fullUrl)">View</button>
+                            <button class="secondary" (click)="trainFileDownload($event, element)" [disabled]="trainDownloadText !== 'Download'">{{trainDownloadText}}</button>
+                            <!-- <button *ngIf="adminProjectOrNot === 'n'" class="secondary">Delete</button> -->
+                        </p>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="trainProps"></tr>
+                <tr mat-row class="data_table" *matRowDef="let row; columns: trainProps;"></tr>
+            </table>
+            <h4 [ngClass]="{'hide': filesLength.train !== 0 }">Not Available</h4>
+            <!-- <ng-template #trainFileElseBlock>
+            </ng-template> -->
+        </div>
+    </div>
+    <div class="widget opaque rounded">
+        <div class="details_wrapper">
+            <h4>Testing File</h4>
+            <table [ngClass]="{'hide': filesLength.test === 0 }" mat-table [dataSource]="testDataSource" class="data_table">
+                <ng-container matColumnDef="{{column.field}}" *ngFor="let column of testColumns; let i = index;">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort">{{column.header}}</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p>{{element[column.field]}}</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="control">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <p class="sort right">Control</p>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        <p class="button">
+                            <button class="primary" (click)="fetchTopTenRecords($event, element.fullUrl)">View</button>
+                            <button class="secondary" (click)="testFileDownload($event, element)" [disabled]="testDownloadText !== 'Download'">{{testDownloadText}}</button>
+                            <!-- <button *ngIf="adminProjectOrNot === 'n'" class="secondary">Delete</button> -->
+                        </p>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="testProps"></tr>
+                <tr mat-row class="data_table" *matRowDef="let row; columns: testProps;"></tr>
+            </table>
+            <h4 [ngClass]="{'hide': filesLength.test !== 0 }">Not Available</h4>
+            <!-- <ng-template #testFileElseBlock>
+            </ng-template> -->
+        </div>
+    </div>
+</div>

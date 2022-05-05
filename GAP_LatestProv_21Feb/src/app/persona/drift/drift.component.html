@@ -1,0 +1,184 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div style="margin-left: 1em;">
+        <form class="input-group" [formGroup]="modelSearchForm" (ngSubmit)="submitDrift()">
+            <!-- <div>
+                <label>Model Name</label>
+                <div style="display: flex;margin-right: 10px;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Model"
+                        [formControl]="modelSearchForm.get('model')" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnModel">
+                        <mat-option *ngFor="let option of modelOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon>
+                </div>
+            </div> -->
+            <div>
+                <label>Brand Name</label>
+                <div style="display: flex;margin-right: 10px;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Brand"
+                        [formControl]="modelSearchForm.get('brand')" [matAutocomplete]="auto5" />
+                    <mat-autocomplete #auto5="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnBrand">
+                        <mat-option *ngFor="let option of brandOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+
+            </div>
+            <div *ngIf="model == 'Direct_Mail'">
+                <label>Card</label>
+                <div style="display: flex;margin-right: 10px;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Card"
+                        [formControl]="modelSearchForm.get('card')" [matAutocomplete]="auto4" />
+                    <mat-autocomplete #auto4="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnCard">
+                        <mat-option *ngFor="let option of cardOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option.displayText}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+            </div>
+            <div *ngIf="model !== 'Direct_Mail'">
+                <label>Location</label>
+                <div style="display: flex;margin-right: 10px;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Card"
+                        [formControl]="modelSearchForm.get('location')" [matAutocomplete]="auto4" />
+                    <mat-autocomplete #auto4="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnLocation">
+                        <mat-option *ngFor="let option of locationOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+            </div>
+            <button mat-raised-button type="submit" color="primary"
+                style="height: 34px;margin-top: 22px">Submit</button>
+        </form>
+    </div>
+    <div class="widget-holder" *ngIf="showDMDrift">
+        <div>
+            <h3>Probability</h3>
+        </div>
+        <div class="widget-holder-row">
+
+            <div class="widget overview opaque rounded" style="height: 19vw;">
+                <div class="wrapperDiv" (click)="showProbability()">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Drift</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value" *ngIf="driftAvailable">{{ overallDrift }}</h4>
+                        <p *ngIf="!driftAvailable" class="label" style="font-size: 14px; margin-top: 4rem;"><strong>{{
+                                errorMsg }}</strong></p>
+                    </div>
+                    <div class="overview-row" *ngIf="driftAvailable">
+                        <p>Overall Drift for the probability model used to predict the probability of response to the
+                            direct mail campaign
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Drift Trend</h4>
+                        <p class="description-chart">Model health through the lens of data drift is tracked for the last
+                            20 executions</p>
+                    </div>
+
+                    <app-line-chart *ngIf="chartReady" lineChartName="driftTrend" [lineChartData]="driftTrendData"
+                        [lineChartLabels]="driftTrendLabels" (lineChartClickEvent)="getDriftValue($event)">
+                    </app-line-chart>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3>Revenue</h3>
+        </div>
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded" style="height: 19vw;">
+                <div class="wrapperDiv" (click)="showRevenue()">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Drift</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value" *ngIf="driftAvailable2">{{ overallDriftRev }}</h4>
+                        <p *ngIf="!driftAvailable2" class="label" style="font-size: 14px; margin-top: 4rem;"><strong>{{
+                                errorMsg }}</strong></p>
+                    </div>
+                    <div class="overview-row" *ngIf="driftAvailable2">
+                        <p>Overall Drift for the revenue model used to predict the expected revenue from the direct mail
+                            campaign
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Drift Trend</h4>
+                        <p class="description-chart">Model health through the lens of data drift is tracked for the last
+                            20 executions</p>
+                    </div>
+
+                    <app-line-chart *ngIf="chartReady1" lineChartName="driftTrend" [lineChartData]="driftTrendDataRev"
+                        [lineChartLabels]="driftTrendLabelsRev"></app-line-chart>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="description" *ngIf="driftAvailable">
+            <p>Model health through the lens of data drift is tracked for the last 20 executions</p>
+        </div> -->
+    </div>
+    <div class="widget-holder" *ngIf="!showDMDrift">
+        <div class="widget-holder-row">
+
+            <div class="widget overview opaque rounded" style="height: 19vw;">
+                <div class="wrapperDiv" (click)="showProbability()">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Drift</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value" *ngIf="driftAvailable">{{ overallDrift }}</h4>
+                        <p *ngIf="!driftAvailable" class="label" style="font-size: 14px; margin-top: 4rem;"><strong>{{
+                                errorMsg }}</strong></p>
+                    </div>
+                    <div class="overview-row" *ngIf="driftAvailable">
+                        <p>Overall Drift for the probability model used to predict the probability of response to the
+                            direct mail campaign
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Drift Trend</h4>
+                        <p class="description-chart">Model health through the lens of data drift is tracked for the last
+                            20 executions</p>
+                    </div>
+
+                    <app-line-chart *ngIf="chartReady" lineChartName="driftTrend" [lineChartData]="driftTrendData"
+                        [lineChartLabels]="driftTrendLabels" (lineChartClickEvent)="getDriftValue($event)">
+                    </app-line-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

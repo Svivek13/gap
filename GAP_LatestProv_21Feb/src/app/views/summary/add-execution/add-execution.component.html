@@ -1,0 +1,64 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="module_body" [ngClass]="{'dark-theme': darkTheme }">
+    <h3>Model : <span class="model capitalize">{{ modelName }}</span></h3>
+
+    <form [formGroup]="addExecFormGroup" (ngSubmit)="addExecSubmit($event)">
+
+        <div style="display: flex; margin: 1rem; margin-left: 0;">
+            <p class="inputs">
+                <mat-checkbox *ngIf="driftCheckboxShow" color="primary" formControlName="drift" class="checkbox">{{drift.label}}</mat-checkbox>&nbsp;&nbsp;&nbsp;
+                <mat-checkbox *ngIf="xaiCheckboxShow" color="primary" formControlName="explainability" class="checkbox">{{explainability.label}}</mat-checkbox>&nbsp;&nbsp;&nbsp;
+            </p>
+        </div>
+
+        <div class="input-group" style="margin-top: 0.5rem;">
+            <button (click)="preLoadedChosen()" [ngClass]="{'primary': preLoadedFlow, 'secondary': newFileFlow}" type="button">Choose Pre-Loaded File</button>
+            <button [ngClass]="{'secondary': preLoadedFlow, 'primary': newFileFlow}" (click)="newFileChosen($event)" type="button">Upload New File</button>
+        </div>
+
+        <div class="input-group upload" style="margin-top: 0.5rem;" *ngIf="preLoadedFlow && driftCheckboxShow">
+            <label>Select Pre-Loaded Train File *</label>
+            <mat-form-field class="dropdown" [floatLabel]="'never'">
+                <mat-select formControlName="trainingDataFile">
+                    <mat-option *ngFor="let trainfile of trainingFiles" [value]="trainfile.url">
+                        {{trainfile.showUrl}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fileContainer" *ngIf="newFileFlow && driftCheckboxShow">
+            <div class="input-group">
+                <label>Upload New Training File</label>
+                <input type="file" class="input" formControlName="newtrainfilename" value="" placeholder="" accept=".xlsx, .xls, .csv, .json" (change)="newTrainFileUpload($event.target.files[0])" />
+            </div>
+        </div>
+        <app-progress-bar *ngIf="trainProgressDisplay" [value]="trainPercentDone"></app-progress-bar>
+
+        <div class="input-group upload" *ngIf="preLoadedFlow">
+            <label>Select Pre-Loaded Test File *</label>
+            <mat-form-field class="dropdown" [floatLabel]="'never'">
+                <mat-select formControlName="testDataFile">
+                    <mat-option *ngFor="let testFile of testFiles" [value]="testFile.url">
+                        {{testFile.showUrl}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="fileContainer" *ngIf="newFileFlow">
+            <div class="input-group">
+                <label>Upload New Testing File</label>
+                <input type="file" class="input" formControlName="newtestfilename" value="" placeholder="" accept=".xlsx, .xls, .csv, .json" (change)="newTestFileUpload($event.target.files[0])" />
+            </div>
+        </div>
+        <app-progress-bar *ngIf="testProgressDisplay" [value]="testPercentDone"></app-progress-bar>
+
+        <div class="save-button">
+            <button class="primary" type="submit">Save</button>
+        </div>
+
+    </form>
+</div>

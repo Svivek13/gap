@@ -1,0 +1,15 @@
+<div class="views">
+  <div class="formholder">
+    <div class="formholder-container">
+      <div class="formholder-helps">
+        <app-td-drift *ngIf="tdType === 'Drift'"></app-td-drift>
+        <app-xai *ngIf="tdType === 'Explainability'"></app-xai>
+        <app-model *ngIf="tdType === 'Models'"></app-model>
+        <app-preprocessed *ngIf="tdType === 'Preprocessed'"></app-preprocessed>
+        <app-personaDoc *ngIf="tdType === 'Persona'"></app-personaDoc>
+        <app-provenance *ngIf="tdType === 'Provenance'"></app-provenance>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <app-scroll-to-top></app-scroll-to-top> -->

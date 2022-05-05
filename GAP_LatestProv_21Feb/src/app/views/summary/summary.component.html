@@ -1,0 +1,54 @@
+<app-common-header></app-common-header>
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="module_body">
+
+    <nav class="headerbar">
+        <div class="headerbar-container-padded">
+            <div class="header">
+                <h3 joyrideStep="fourthStep" title="Data Scientist" text="Data Scientist Sample Text!" (next)="afterFourthStep()">Project Summary - {{ projectName }} - {{selectdTree}} <span>Data till {{dataTill}}</span></h3>
+            </div>
+        </div>
+    </nav>
+
+    <div class="view-container">
+        <div class="filters">
+            <div class="filters-wrapper">
+                <ul class="filters-list">
+                    <li class="input-group" [formGroup]="summaryForm">
+                        <label>Project Name</label>
+                        <div style="display: flex;">
+                            <input matInput type="text" class="search" placeholder="Select project" formControlName="projectName" [matAutocomplete]="auto" />
+                            <mat-autocomplete #auto="matAutocomplete" [panelWidth]="180" (optionSelected)='getProjDetails($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.displayText" style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.displayText}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <!-- <mat-autocomplete #auto="matAutocomplete" *ngIf="getFilteredOptionsLength === 0">
+                                <mat-option>No matches found</mat-option>
+                            </mat-autocomplete> -->
+                            <mat-icon matSuffix class="search-icon"
+                                (mouseenter)="onHoverSearchIcon()" 
+                                (mouseleave)="onLeaveSearchIcon()"
+                                (click)="clearSearch()"
+                            >{{iconText}}</mat-icon>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="collapsible" (click)="changeDetails($event.target)">
+                    <li [ngClass]="{selected: details}">Repository</li>
+                    <li [ngClass]="{selected: recentExecs}">Recent Executions</li>
+                    <li [ngClass]="{selected: allExecutions}">All Executions</li>
+                </ul>
+            </div>
+        </div>
+
+        <app-details *ngIf="details" [name]="projectName" [modelFile]="modelFile" [testFiles]="testFiles" [trainFiles]="trainFiles" [modelType]="modelType" [desc]="description" [adminProjectOrNot]="adminProjectOrNot" [filesLength]="filesLength"></app-details>
+        <app-recent-exec *ngIf="recentExecs" [projectId]="projectId" [execId]="recentExecId" [execType]="execType" [projName]="projectName"></app-recent-exec>
+        <app-all-executions *ngIf="allExecutions" [filesLength]="filesLength" [modelName]="modelName" [summaryDataSource]="summaryTableData" [executionType]="execType" [projectId]="projectId" [projectName]="projectName" [latestExecId]="recentExecId" [adminProjectOrNot]="adminProjectOrNot"></app-all-executions>
+
+    </div>
+
+</div>
+<app-common-footer></app-common-footer>

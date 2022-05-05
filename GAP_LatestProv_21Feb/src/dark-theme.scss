@@ -1,0 +1,25 @@
+$bgcolor: #242829;
+$fontcolor: #f3f3f3;
+$input-bg: #fff;
+$buttonhover: #f27b50;
+$bordercolor: lighten($bgcolor, 10%);
+$input-radius: 0.35em;
+$shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+$widgetbg: lighten($bgcolor, 5%);
+$widgetfontcolor: $fontcolor;
+$iconfilter: grayscale(100%) brightness(200%);
+$iconfilterhover: saturate(100%);
+$iconpath: "images/icon/dark/";
+
+//chart values
+$charttext: #999;
+$chartgrid: darken($bordercolor, 5%);
+$chartgridhigh: lighten($bordercolor, 15%);
+$chartticks: #999;
+$chartselected: #ccc;
+
+// background-color: $bgcolor !important;
+// color: $fontcolor !important;
+
+@import "stylebase";
+@import "linechart";

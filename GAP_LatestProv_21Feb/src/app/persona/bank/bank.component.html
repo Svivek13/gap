@@ -1,0 +1,84 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <!-- Term Deposit Adoption Rate - Number Card/1 -->
+            <div class="widget overview opaque rounded">
+                <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Term Deposit Adoption Rate</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value">{{tdAdoptionRate}}</h4>
+                        <!-- <p *ngIf="!driftAvailable" style="font-size: 14px; margin-top: 4rem;"><strong>{{ errorMsg }}</strong></p> -->
+                    </div>
+                </div>
+            </div>
+            <!-- Campaign Success (Adoption Rate) by Previous Campaign Performance - Horizontal Bar Chart/2 (#Customers to be highlighted on each bar) -->
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row alert">
+                            <h4 class="label">Adoption Rate by Previous Campaign Response</h4>
+                        </div>
+                    </div>
+                    <br>
+                    <app-horizontal-bar-chart *ngIf="arpcHorChartReady" chartName="xai" [datasets]="arpcHorBarChartData" [labels]="arpcHorBarChartLabels" [colors]="arpcHorBarChartColors" xLabel="Adoption Rate" yLabel="Previous Response"></app-horizontal-bar-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-holder" style="display: flex;">
+        <div class="widget-holder-row" style="width: 50%;">
+            <!-- Adoption Rate by Current Engagement - Bar Chart/3-vertical bar chart (#Customers to be highlighted on each bar) -->
+            <div class="widget half-chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row alert">
+                            <h4 class="label">Adoption Rate by Current Engagement</h4>
+                        </div>
+                    </div>
+                    <br>
+                    <app-bar-chart *ngIf="arceChartReady" [barChartData]="arceBarChartData" [barChartLabels]="arceBarChartLabels" [barChartColors]="metricColors" [barChartLegend]=false xLabel="Engagement" yLabel="Adoption Rate"></app-bar-chart>
+                </div>
+            </div>
+            <!-- Adoptions by Days since last touch point - Line Chart/4 -->
+            <div class="widget-holder-row" style="width: 50%;">
+                <div class="widget half-chart">
+                    <div class="wrapperDiv">
+                        <div class="chart-row alert">
+                            <h4 class="label">Adoption by Days Since Last Contact</h4>
+                            <p class="description-chart">Most of the active leads get converted within 30 days of contacting them</p>
+                        </div>
+                        <app-line-chart *ngIf="lineChartReady" lineChartName="buTemps" [lineChartData]="lineChartData" [lineChartLabels]="lineChartLabels" xLabel="Days" yLabel="Adoption"></app-line-chart>
+                        <!-- <div class="description" *ngIf="lineChartReady" style="margin-left: 0;">
+                            <p>Most of the active leads get converted within 30 days of contacting them</p>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <!-- Current Campaign - Adoptions by Contacts in current campaign - Horizontal Bar Chart/5 -->
+            <div class="widget full-chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row alert">
+                            <h4 class="label">Adoptions by Touch Points - Current Campaign</h4>
+                            <p class="description-chart">Contacting a lead more than 5 times rarely leads to a fruitful result</p>
+                        </div>
+                    </div>
+                    <br>
+                    <app-horizontal-bar-chart *ngIf="acHorChartReady" chartName="bank" [datasets]="acHorBarChartData" [labels]="acHorBarChartLabels" [colors]="acHorBarChartColors" xLabel="Adoptions" yLabel="#Touch Points"></app-horizontal-bar-chart>
+                    <!-- <div class="description" *ngIf="acHorChartReady" style="margin-left: 0;">
+                        <p>Contacting a lead more than 5 times rarely leads to a fruitful result</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

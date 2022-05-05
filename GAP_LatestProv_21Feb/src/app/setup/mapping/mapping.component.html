@@ -1,0 +1,103 @@
+<div class="popup-white">
+    <div class="popup-white-close"></div>
+    <div class="popup-white-canvas">
+        <div class="popup-white-canvas-container wide" [ngClass]="{'container-width': selectedIndex === '1'}">
+            <mat-tab-group mat-stretch-tabs class="popup-tabs" [selectedIndex]="selectedIndex">
+                <mat-tab class="popup-tab" label="Top 10 Records">
+                    <div class="table_container_scroll">
+                        <table mat-table [dataSource]="topTenRecords" class="data_table">
+                            <ng-container matColumnDef="{{column}}" *ngFor="let column of topColumns; let i = index;">
+                                <ng-container *ngIf="i == 0">
+                                    <th mat-header-cell *matHeaderCellDef style="text-align: right; width: 1rem;">
+                                        <p class="sort">Sl</p>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element; let a = index;" style="text-align: right;">
+                                        <p>{{sl[a]}}</p>
+                                    </td>
+                                </ng-container>
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p class="sort">{{column}}</p>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <p>{{element[column]}}</p>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="topColumns"></tr>
+                            <tr mat-row class="data_table" *matRowDef="let row; columns: topColumns;"></tr>
+                        </table>
+                    </div>
+                    <div style="margin: 0.5em 1em;">
+                        <app-button buttonLabel="Close" [color]="true" [mat-dialog-close]=""></app-button>
+                    </div>
+                </mat-tab>
+
+                <!-- Second Tab -->
+
+                <mat-tab class="selected" label="Configure Target Variables" *ngIf="showTargetTab">
+                    <form [formGroup]="targetFormGroup" style="margin-top: 1.5rem;">
+                        <div class="table targetTable popup-content" style="padding: 0; border: none;">
+                            <div class="row">
+                                <div class="cell input">
+                                    <p>
+
+                                    </p>
+                                </div>
+                                <div class="cell">
+                                    <p style="font-size: 1em;"><strong>Choose Target Variable</strong></p>
+                                </div>
+                                <div class="cell" style="padding-top: 0.5rem;">
+                                    <mat-form-field class="dropdown target-dropdown" [floatLabel]="'never'">
+                                        <mat-select name="target" placeholder="Choose Target Variable" formControlName="targetVariableSelected" [errorStateMatcher]="matcher">
+                                            <mat-option *ngFor="let target of targetVariables" [value]="target.name">
+                                                {{target.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error style="margin-top: 1.5rem" *ngIf="targeteFormControl?.hasError('required')">
+                                            Target is <strong>required</strong>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="mappingData.data.dxCase === 'X' || mappingData.data.dxCase === 'BOTH'" class="row">
+                        <div class="cell input">
+                            <p>
+
+                            </p>
+                        </div>
+                        <div class="cell">
+                            <p><strong>Class Names</strong></p>
+                        </div>
+                        <div class="cell" style="padding-top: 0.5rem;">
+                            <mat-form-field floatLabel="never" class="classname">
+                                <input matInput class="inputClass" type="text" name="className" value="" placeholder="Enter Class Name" formControlName="className" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div *ngIf="mappingData.data.dxCase === 'X' || mappingData.data.dxCase === 'BOTH'" class="row">
+                        <div class="cell input">
+                            <p>
+
+                            </p>
+                        </div>
+                        <div class="cell">
+                            <p><strong>Categorical Variables</strong></p>
+                        </div>
+                        <div class="cell" style="padding-top: 0.5rem;">
+                            <mat-form-field class="dropdown" [floatLabel]="'never'">
+                                <mat-select multiple placeholder="Choose Categorical Variables" formControlName="catVariables">
+                                    <mat-option *ngFor="let variables of targetVariables; index as i" [value]="i">{{variables.name}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                        </div>
+                    </form>
+                    <div class="popup-white-canvas-footer">
+                        <app-button buttonLabel="Save and Continue" [color]="true" (click)="saveMappingData()" [disabled]="targetFormGroup.invalid"></app-button>
+                        <!-- <app-button buttonLabel="Close" [mat-dialog-close]=""></app-button> -->
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

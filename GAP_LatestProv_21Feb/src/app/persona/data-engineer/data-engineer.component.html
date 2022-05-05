@@ -1,0 +1,223 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <h4>
+                Record Count Comparison
+            </h4>
+            <span class="lastModified">Last Modified : {{insertDate}}</span>
+            <p>Shows the counts of records of Source and Target tables during data processing.</p>
+            <div class="widget overview opaque rounded" *ngIf="recordCount_data">
+
+                <table mat-table [dataSource]="recordCount_data" class="data_table" matSort>
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="Brand">
+                        <th mat-header-cell *matHeaderCellDef>Brand </th>
+                        <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="source_name">
+                        <th mat-header-cell *matHeaderCellDef> Source Table </th>
+                        <td mat-cell *matCellDef="let element"> {{element.source_name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="source_count">
+                        <th mat-header-cell *matHeaderCellDef> Source Count </th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'first': getPerVal(element.percentageDifference) }"> {{element.source_count | number}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="sink_count">
+                        <th mat-header-cell *matHeaderCellDef> Target Count </th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'first': getPerVal(element.percentageDifference) }"> {{element.sink_count | number}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sink_name">
+                        <th mat-header-cell *matHeaderCellDef> Target Table </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sink_name}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row class="data_table" *matRowDef="let row; columns: displayedColumns;"
+                        (click)="getDrillDownResult(row.sink_name,row.source_name)"></tr>
+                </table>
+
+                <!-- <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Interpreter Details</h4>
+                    </div>
+                    <div class="overview-row">
+                        <div>
+                            <div class="value">Python Version - <span class="version">{{pythonVersion}}</span>
+                            </div>
+                            <div class="value">OS Used - <span class="version">{{osUsed}}</span>
+                            </div>
+                            <div class="value">
+                                Kubernetes Version - <span class="version">{{kubernetesVersion}}</span>
+                            </div>
+                            <div class="value">
+                                MongoDB Version - <span class="version">{{mongoVersion}}</span>
+                            </div>
+                            <div class="value">
+                                MySQL Version - <span class="version">{{mysqlVersion}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row">
+                            <h4 class="label">Run Duration</h4>
+                            <p class="description-chart">Shows the time required to execute each of the execution of the project</p>
+                        </div>
+                        <div class="chartSettings">
+                            <span class="dropdownSpan">
+                      <label class="axisLabel">Execution Type</label>
+                      <mat-form-field class="chartDropdown" [floatLabel]="'never'">
+                          <mat-select [(ngModel)]="dropSelected"  (selectionChange)="changeDurationMetric($event)">
+                              <mat-option *ngFor="let metric of metrics" [value]="metric">
+                                  {{metric}}
+                              </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                    </span>
+                        </div>
+                    </div>
+                    <app-line-chart *ngIf="durationChartReady" lineChartName="buTemps" [lineChartData]="durationChartData" [lineChartLabels]="durationChartLabels" xLabel="Execution Number" yLabel="Duration (secs)"></app-line-chart>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="widget-holder" *ngIf="syndicationData">
+        <div class="filters">
+            <div class="filters-wrapper">
+                <div class="form-control formCls">
+                    <form [formGroup]="syndicationAttr" style="display:flex" (ngSubmit)="fetchDeData()">
+                        <div class="input-group">
+                            <label>Attribute</label>
+                            <input matInput type="text" class="search" placeholder="Search Attribute"
+                                [formControl]="syndicationAttr.get('attribute')" [matAutocomplete]="auto1" />
+                            <mat-autocomplete #auto1="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnAttr">
+                                <mat-option *ngFor="let option of attrfilteredOptions" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.displayText}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+
+                        </div>
+                        <div class="input-group">
+                            <label>Brand</label>
+                            <input matInput type="text" class="search" placeholder="Search Brand"
+                                [formControl]="syndicationAttr.get('brand')" [matAutocomplete]="auto2" />
+                            <mat-autocomplete #auto2="matAutocomplete" [panelWidth]="180" [displayWith]="displayFn">
+                                <mat-option *ngFor="let options of filteredOptions" [value]="options"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{options}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                        <div class="input-group">
+                            <label>Location</label>
+                            <input matInput type="text" class="search" placeholder="Search Location"
+                                [formControl]="syndicationAttr.get('location')" [matAutocomplete]="auto7" />
+                            <mat-autocomplete #auto7="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnLocation">
+                                <mat-option *ngFor="let options of locationOptions" [value]="options"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{options}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                        <div class="input-group" *ngIf="showDMDE">
+                            <label>Decile</label>
+                            <input matInput type="text" class="search" placeholder="Search Decile"
+                                [formControl]="syndicationAttr.get('decile')" [matAutocomplete]="auto3" />
+                            <mat-autocomplete #auto3="matAutocomplete" [panelWidth]="180"
+                                [displayWith]="displayFnDecile">
+                                <!-- <mat-option [label]='Select'></mat-option> -->
+                                <mat-option *ngFor="let options of decileOtions" [value]="options"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{options}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                        <div class="input-group" *ngIf="showPPDE">
+                            <label>Model Type</label>
+                            <input matInput type="text" class="search" placeholder="Search Model Type"
+                                [formControl]="syndicationAttr.get('model_type')" [matAutocomplete]="auto4" />
+                            <mat-autocomplete #auto4="matAutocomplete" [panelWidth]="180"
+                                [displayWith]="displayFnModelType">
+                                <!-- <mat-option [label]='Select'></mat-option> -->
+                                <mat-option *ngFor="let options of modelTypeFilter" [value]="options"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{options}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                        <button mat-raised-button type="submit" color="primary"
+                            style="height: 34px;margin-top: 22px">Submit</button>
+                    </form>
+                    <!-- <ul class="filters-list"> -->
+
+                    <!-- </ul> -->
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row">
+            <div class="widget chartrow">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Pre Syndication Check</h4>
+                        <span class="lastModified">Last Modified : {{insertDateSyndication}}</span>
+                        <p class="description-chart">Sanity check that compares the attribute against the last syndicated set of scores to ensure variance isn't too high.</p>
+                    </div>
+                    <br>
+                    <app-bar-chart *ngIf="processedChartReady" [barChartData]="processedChartData"
+                        [barChartLabels]="processedChartLabels" [barChartLegend]=false xLabel="Execution Time"
+                        yLabel="Percentage_Difference" [barChartColors]="processedColors"></app-bar-chart>
+                </div>
+            </div>
+
+            <!-- <div class="widget chartrow">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row">
+                            <h4 class="label">Compute cost</h4>
+                            <p class="description-chart">The cost for the last execution was <strong>${{lastCost}}</strong></p>
+                        </div>
+                        <div class="chartSettings">
+                            <span class="dropdownSpan">
+                        <label class="axisLabel">Execution Type</label>
+                        <mat-form-field class="chartDropdown" [floatLabel]="'never'">
+                            <mat-select [(ngModel)]="costSelected" (selectionChange)="changeCostMetric($event)">
+                                <mat-option *ngFor="let metric of metrics" [value]="metric">
+                                    {{metric}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                      </span>
+                        </div>
+                    </div>
+                    <app-line-chart *ngIf="costChartReady" lineChartName="buTemps" [lineChartData]="costChartData" [lineChartLabels]="costChartLabels" xLabel="Execution Number" yLabel="Cost (in $)"></app-line-chart>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+</div>

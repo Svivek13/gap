@@ -1,0 +1,41 @@
+<mjml>
+  <mj-body background-color="#d6dde5">
+    <mj-section padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-image src="https://www.tredence.com/wp-content/uploads/2021/05/logo.png" alt="Tredence logo" align="center" border="none" width="182px" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-bottom="0px" padding-top="0px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-image src="https://www.tredence.com/wp-content/uploads/2021/05/invitation-for-ml-works.png" alt="invitation" align="center" border="none" padding-left="0px" padding-right="0px" padding-bottom="0px" padding-top="0"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#ffffff" padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%" vertical-align="top">
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="0px" padding-top="10px">
+          <p>Hello!</p>
+          <p>You have been invited to a free trial of our MLOps platform, ML Works by {{inviterName}}. Please click on this button to complete your sign-up process.</p>          
+          
+        </mj-text>
+          <mj-button border-radius="0px" background-color="#f17f21" href={{signUpLink}} align="center" font-weight="bold" font-family="calibri, sans-serif" font-size="16px">
+          CLICK HERE</mj-button>
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="0px" padding-top="0px">
+          
+          <p>We look forward to have you as part of our community.</p>
+        </mj-text>
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="10px" padding-top="10px">
+          <span style="display: block;">Thank You,</span>
+        </mj-text>
+        <mj-text color="#000000" font-family="calibri, sans-serif" font-size="16px" padding-left="25px" padding-right="25px" padding-bottom="10px" padding-top="0px" font-weight="bold">ML Works Team
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding-bottom="20px" padding-top="20px">
+      <mj-column width="100%" vertical-align="middle">
+        <mj-text align="center" color="#000000" font-family="calibri, sans-serif" font-size="13px" padding-left="25px" padding-right="25px" padding-bottom="0px" padding-top="0">
+          <p>Tredence Inc, 1900 Camden Avenue, #66, San Jose, CA 95124, (+1) 408-819-2336 / (+1) 408-516-9074</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

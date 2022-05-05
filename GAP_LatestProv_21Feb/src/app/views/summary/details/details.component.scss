@@ -1,0 +1,239 @@
+.views {
+    width: auto;
+    min-width: 85vw;
+    max-width: 85vw;
+}
+
+.widget {
+    margin-bottom: 2em;
+}
+
+.widget h2,
+.widget h3,
+.widget h4 {
+    padding: .35em 0;
+    margin: 0 1vw;
+}
+
+.widget.opaque {
+    background-color: var(--cardcolor);
+    width: calc(100% - 3em);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.05);
+}
+
+.widget.rounded {
+    border-radius: .5em;
+}
+
+.widget.project-description {
+    max-width: 60vw;
+    min-width: 60vw;
+}
+
+.widget.project-description p {
+    padding: .35em 0;
+    margin: 0 1vw;
+}
+
+.widget.project-description .details_wrapper .chart-row {
+    min-height: 2vw;
+    position: relative;
+}
+
+.widget.project-description .details_wrapper .chart-row.alert:after {
+    content: '';
+    /* background-image: url("images/icon/alarm-grey.png"); */
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    width: 2.2em;
+    height: 2.2em;
+    position: absolute;
+    right: 0;
+    top: .3em;
+    bottom: auto;
+    transition: all .2s;
+    opacity: 1;
+}
+
+table.data_table {
+    width: 97%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table.data_table tr td {
+    border-right: 1px solid var(--borderrightcolor);
+    border-bottom: 1px solid var(--borderbottomcolor3);
+    max-width: 25vw;
+    vertical-align: top;
+}
+
+table.data_table tr td button {
+    padding: .6em 1em;
+}
+
+table.data_table tr td:last-child {
+    border-right: none;
+}
+
+table.data_table tr td p {
+    padding: .5em .5em;
+}
+
+table.data_table tr td p.status {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+table.data_table tr td p.status:before {
+    content: '';
+    width: .75em;
+    height: .75em;
+    border-radius: 100%;
+    background-color: #ccc;
+    display: inline-block;
+    margin-right: .5em;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+table.data_table tr td p.status.green:before {
+    background-color: #A2C55D;
+}
+
+table.data_table tr td p.status.red:before {
+    background-color: #FF5555;
+}
+
+table.data_table tr td p.status.orange:before {
+    background-color: #FF993A;
+}
+
+table.data_table tr td p.number,
+table.data_table tr td p.date,
+table.data_table tr td p.button {
+    text-align: right;
+}
+
+table.data_table tr td p.icon {
+    text-align: center;
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+table.data_table tr td p.sort {
+    background-size: auto 1.5em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 1.8em;
+}
+
+table.data_table tr th.mat-header-cell p.sort:hover {
+    color: #F27B50;
+    cursor: pointer;
+}
+
+table.data_table tr:last-child td {
+    border-bottom: none;
+}
+
+table.data_table th.mat-header-cell {
+    font-weight: bold;
+    font-size: 1em;
+    color: var(--tablefontcolor);
+    padding: .5em .5em;
+    border-bottom: 1px solid var(--borderbottomcolor);
+    border-right: 1px solid var(--borderrightcolor);
+}
+
+table.data_table tr.mat-row:hover {
+    background-color: var(--tablerowhover);
+}
+
+:host ::ng-deep td.mat-cell:first-of-type {
+    padding-left: 0;
+}
+
+:host ::ng-deep td.mat-cell:last-of-type {
+    padding-right: 0;
+}
+
+tr.mat-header-row {
+    height: 40px !important;
+}
+
+.mat-column-name {
+    font-weight: bold;
+}
+
+th,
+td {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+button {
+    text-decoration: none;
+    padding: 1em 1.4em;
+    border-radius: 0.35em;
+    color: #807b77;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: .5em;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #f7f7f7;
+}
+
+button.primary {
+    background-color: #F27B50;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #F27B50;
+}
+
+button.alert {
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #F27B50;
+}
+
+button.secondary {
+    background-color: transparent;
+    border: 1px solid #F27B50;
+    color: #F27B50;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 45%;
+}
+
+.hide {
+    display: none;
+}

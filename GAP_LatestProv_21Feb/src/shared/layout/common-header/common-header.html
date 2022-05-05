@@ -1,0 +1,64 @@
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="logo" (click)="gotoOverview($event)"></div>
+        <div class="controls">
+            <div class="controls-group">
+                <!-- <a joyrideStep="step13" title="{{tours.step13.title}}" text="{{tours.step13.text}}"
+                    class="controls-icon overview" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    routerLink="/cockpit" (click)="gotoOverviewTest($event)" matTooltip="Cockpit"
+                    matTooltipPosition="below">
+                </a> -->
+                 <a joyrideStep="step13" title="{{tours.step13.title}}" text="{{tours.step13.text}}"
+                    class="controls-icon overview" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    [routerLink]="['/cockpit']" (click)="gotoOverviewTest($event)" matTooltip="Cockpit"
+                    matTooltipPosition="below">
+                </a>
+                <!-- <a joyrideStep="step10" title="{{tours.step10.title}}" text="{{tours.step10.text}}"
+                    class="controls-icon overview" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    routerLink="/overview" (click)="gotoOverview($event)" matTooltip="Provenance Graph"
+                    matTooltipPosition="below">
+                </a> -->
+                <a joyrideStep="step11" title="{{tours.step11.title}}" text="{{tours.step12.text}}"
+                    class="controls-icon insight" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                    [routerLink]="['/persona']" (click)="gotoPersona($event)" matTooltip="Dashboard"
+                    matTooltipPosition="below">
+                </a>
+
+            </div>
+            <!-- <div class="controls-group">
+                <a class="controls-icon projects" joyrideStep="step12" title="{{tours.step12.title}}" text="{{tours.step12.text}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/dqm" (click)="gotoDqm($event)" matTooltip="Data Quality Management"
+                    matTooltipPosition="below">
+                </a>
+            </div> -->
+            <!-- <div class="controls-group">
+                <div joyrideStep="step13" title="{{tours.step13.title}}" text="{{tours.step13.text}}" class="controls-icon tour" (click)="tourStart($event)" matTooltip="Tour" matTooltipPosition="below" style="text-align: center;">
+                </div>
+
+                <a class="controls-icon help" joyrideStep="step14" title="{{tours.step14.title}}" text="{{tours.step14.text}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/help" (click)="navigateToSettings($event)" matTooltip="Help"
+                    matTooltipPosition="below">
+                </a>
+
+                <a 
+                    joyrideStep="step18" title="{{tours.step18.title}}" text="{{tours.step18.text}}"
+                    class="controls-icon add" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/setup" matTooltip="Add New Project" matTooltipPosition="below">
+                </a>
+
+                <div class="controls-icon darkmode" joyrideStep="step15" title="{{tours.step15.title}}" text="{{tours.step15.text}}" (done)="onDone()" (click)="toggleTheme($event)" matTooltip="Theme" matTooltipPosition="below"></div>
+            </div> -->
+            <div class="controls-group" [matMenuTriggerFor]="menu" (click)="logoutPrompt($event)" matTooltip="User"
+                matTooltipPosition="below">
+                <div class="controls-icon user">
+                    <h4>{{loggedInUsername}}</h4>
+                </div>
+            </div>
+
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item style="display: flex; align-items: center;" (click)="logOut()"><span
+                        class="material-icons" style="margin-right: 0.3rem;">
+                        logout
+                    </span>Log Out</button>
+            </mat-menu>
+
+        </div>
+    </div>
+</nav>

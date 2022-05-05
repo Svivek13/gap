@@ -1,0 +1,24 @@
+.featuresPaginator {
+    display: flex;
+    justify-content: center;
+    // margin-top: 1rem;
+}
+
+.paginatorIcon {
+    cursor: pointer;
+    font-size: 28px;
+}
+
+.pageText {
+    align-self: center;
+}
+
+.paginationButton {
+    border: none;
+    background: transparent;
+    color: var(--fontcolor);
+}
+
+button:disabled {
+    filter: var(--disabledbtnfilter);
+}

@@ -1,0 +1,102 @@
+<app-common-header></app-common-header>
+
+<div class="module_body">
+    <nav class="headerbar">
+        <div class="headerbar-container-padded">
+            <div class="header">
+                <h3>{{parentNode}} {{ modelName }} {{divider}} {{childNode}}
+                    <span *ngIf="dataTill && dataTill !== 'NA'">Last updated {{dataTill}}</span>
+                </h3>
+            </div>
+        </div>
+    </nav>
+
+    <div class="view-container">
+        <div class="filters">
+            <div class="filters-wrapper">
+                <ul class="filters-list">
+                    <li class="input-group" [formGroup]="projectSearchForm">
+                        <label>Model Name</label>
+                        <div style="display: flex;">
+                            <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search project" formControlName="projectName" [matAutocomplete]="auto" />
+                            <mat-autocomplete #auto="matAutocomplete" [panelWidth]="180" (optionSelected)='getProjDetails($event.option.value)'>
+                                <mat-option *ngFor="let option of options" [value]="option.value" style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.show}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-icon matSuffix class="search-icon" 
+                                (mouseenter)="onHoverSearchIcon()" 
+                                (mouseleave)="onLeaveSearchIcon()"
+                                (click)="clearSearch()"
+                            >{{iconText}}</mat-icon>
+                        </div>
+                    </li>
+                    <!-- <li class="input-group" [formGroup]="projectSearchForm">
+                        <label>Brand</label>
+                        <div style="display: flex;">
+                            <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Brand" formControlName="brand" [matAutocomplete]="auto" />
+                            <mat-autocomplete #auto="matAutocomplete" [panelWidth]="180" (optionSelected)='getProjDetails($event.option.value)'>
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option.displayText" style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.displayText}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <mat-icon matSuffix class="search-icon" 
+                                (mouseenter)="onHoverSearchIcon()" 
+                                (mouseleave)="onLeaveSearchIcon()"
+                                (click)="clearSearch()"
+                            >{{iconText}}</mat-icon>
+                        </div>
+                    </li> -->
+                </ul>
+
+                <mat-tree joyrideStep="step22" title="{{tours.step22.title}}" text="{{tours.step22.text}}" (next)="onStep22Next()" [dataSource]="treeSource" [treeControl]="treeControl" class="matTree">
+                    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding (click)="getActiveNode(node)">
+                        <li class="mat-tree-node" (click)="getPersonaDetails($event.target.textContent)">
+                            <span *ngIf="node.name !== 'Drift'" [ngClass]="{ 'background-highlight': activeNode.name === node.name }">{{node.name}}</span>
+                            <span *ngIf="node.name === 'Drift'" joyrideStep="step23" title="{{tours.step23.title}}" text="{{tours.step23.text}}" [ngClass]="{ 'background-highlight': activeNode.name === node.name }">{{node.name}}</span>
+                            <button mat-icon-button disabled></button>
+                        </li>
+                    </mat-tree-node>
+                    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                        <li>
+                            <div *ngIf="node.name === 'Explainability'" joyrideStep="step25" title="{{tours.step25.title}}" text="{{tours.step25.text}}" (prev)="prevOfXAITour()" class="mat-tree-node" (click)="changeState(node)">
+                                {{node.name}}
+                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" (click)="changeState(node)">
+                                    <mat-icon class="mat-icon-rtl-mirror tree_icon">
+                                        {{node.expanded ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                            </div>
+                            <div *ngIf="node.name !== 'Explainability'" class="mat-tree-node" (click)="changeState(node)">
+                                {{node.name}}
+                                <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" (click)="changeState(node)">
+                                    <mat-icon class="mat-icon-rtl-mirror tree_icon">
+                                        {{node.expanded ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                            </div>
+                            <ul [class.tree-invisible]="!node.expanded" style="cursor: pointer;" (click)="getPersonaDetails($event.target)">
+                                <ng-container matTreeNodeOutlet></ng-container>
+                            </ul>
+                        </li>
+                    </mat-nested-tree-node>
+                </mat-tree>
+            </div>
+        </div>
+
+        <app-drift *ngIf="showDrift" (dataTillEvent)="dataTillSave($event)" [modelObj]="modelObj" [execId]="execId" [pId]="projectId" [projName]="projectName" (xaiTourEvent)="afterStep24()"></app-drift>
+        <app-explainability *ngIf="showExplainability" [pId]="projectId" [modelObj]="modelObj" [projName]="projectName" (loadDriftEvent)="prevOfXAITour()"></app-explainability>
+        <app-diabetes *ngIf="showDiabetes" [execId]="execId" [pId]="projectId" [modelObj]="modelObj" [name]="projectName" [createdBy]="createdBy"></app-diabetes>
+        <app-telco *ngIf="showTelco" [projId]="projectId" [projName]="projectName" [execId]="execId" [createdBy]="createdBy"></app-telco>
+        <app-bike-sharing *ngIf="showBikeSharing" [projId]="projectId" [execId]="execId" [projName]="projectName" [createdBy]="createdBy"></app-bike-sharing>
+        <app-dqm *ngIf="showDQM" [pId]="projectId" [modelObj]="modelObj" [projName]="projectName"></app-dqm>
+        <app-bank *ngIf="showBank" [projId]="projectId" [execId]="execId" [projName]="projectName" [createdBy]="createdBy"></app-bank>
+        <app-blurred *ngIf="showBlurred" [projId]="projectId" [projName]="projectName" [createdBy]="createdBy"></app-blurred>
+        <app-explorer *ngIf="showBlurredExplorer"></app-explorer>
+        <app-log *ngIf="showBlurredLog"></app-log>
+        <app-xai-bias *ngIf="showBlurredBias"></app-xai-bias>
+        <app-data-engineer *ngIf="showDE" [projId]="projectId" [modelObj]="modelObj" [projName]="projectName" [createdBy]="createdBy"></app-data-engineer>
+    </div>
+</div>
+
+<app-common-footer></app-common-footer>

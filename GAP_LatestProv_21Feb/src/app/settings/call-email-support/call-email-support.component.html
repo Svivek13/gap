@@ -1,0 +1,44 @@
+<div class="views">
+    <div class="formholder">
+        <div class="formholder-container">
+            <div class="formholder-inputs">
+                <form [formGroup]="supportFormGroup" (ngSubmit)="supportSubmit($event)">
+                    <div class="input-sections">
+                        <h4>Contact support</h4>
+                        <div class="input-group">
+                            <label>Subject</label>
+                            <mat-form-field floatLabel="never">
+                                <input matInput type="text" value="" placeholder="Subject" formControlName="subject" />
+                            </mat-form-field>
+                        </div>
+                        <div class="input-group">
+                            <label>Describe your problem</label>
+                            <mat-form-field floatLabel="never" style="width: 100%;">
+                                <textarea class="textarea" matInput value="" placeholder="Short description for problem" name="" rows="6" formControlName="query"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <!-- <div class="input-sections">
+                        <div class="input-group">
+                            <label>Phone Number (Optional)</label>
+                            <mat-form-field floatLabel="never">
+                                <input matInput type="text" value="" placeholder="Phone Number" />
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+                    <div class="input-sections">
+                        <div class="input-group">
+                            <button class="primary" type="submit">Send</button>
+                            <!-- <button>Ask for a callback</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="formholder-helps hidden">
+                <h4>Help?</h4>
+                <p>Contact the team if you want to get the Enterprise version installed for your firm or if you seek any support to fully utilize the trial version </p>
+            </div>
+        </div>
+    </div>
+</div>

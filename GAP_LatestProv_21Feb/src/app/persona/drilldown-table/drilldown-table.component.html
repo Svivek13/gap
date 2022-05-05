@@ -1,0 +1,57 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<div style="display: flex; flex-direction: row; margin-bottom: 0.5rem; position: relative;">
+    <h3 class="projHeading">Drill Down Table</h3>
+</div>
+<mat-divider></mat-divider>
+<div>
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+          
+            <div class="widget overview opaque rounded" *ngIf="drillDownData">
+
+                <table mat-table [dataSource]="drillDownData" class="data_table" matSort>
+
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                    <ng-container matColumnDef="Decile">
+                        <th mat-header-cell *matHeaderCellDef>Decile </th>
+                        <td mat-cell *matCellDef="let element"> {{element.decile}} </td>
+                    </ng-container>
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="Brand">
+                        <th mat-header-cell *matHeaderCellDef>Brand </th>
+                        <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="source_name">
+                        <th mat-header-cell *matHeaderCellDef> Source Table </th>
+                        <td mat-cell *matCellDef="let element"> {{element.source_name}} </td>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="source_count">
+                        <th mat-header-cell *matHeaderCellDef> Source Count </th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'first': getPerVal(element.percentageDifference) }"> {{element.source_count | number}} </td>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="sink_count">
+                        <th mat-header-cell *matHeaderCellDef> Target Count </th>
+                        <td mat-cell *matCellDef="let element"  [ngClass]="{'first': getPerVal(element.percentageDifference) }"> {{element.sink_count | number}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sink_name">
+                        <th mat-header-cell *matHeaderCellDef> Target Table </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sink_name}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row class="data_table" *matRowDef="let row; columns: displayedColumns;"  ></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

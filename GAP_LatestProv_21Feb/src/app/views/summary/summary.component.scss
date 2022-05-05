@@ -1,0 +1,223 @@
+.module_body {
+    font-size: 1vw !important;
+    overflow-x: hidden;
+    min-height: 78vh;
+}
+
+.view-container {
+    display: flex;
+    // padding-bottom: 2em;
+}
+
+.filters {
+    width: auto;
+    min-width: 15vw;
+    max-width: 15vw;
+}
+
+.filters-wrapper {
+    padding: .5em 1vw;
+}
+
+.filters-list {
+    list-style: none;
+    padding: 0 0 2em 0 !important;
+    margin: 0;
+    font-size: 0.9em !important;
+}
+
+.filters-list li {
+    padding: .75em 0;
+    border-bottom: 1px solid var(--borderbottomcolor2);
+}
+
+.filters-list li.input-group {
+    padding: 0 0;
+    position: relative;
+}
+
+input {
+    display: block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    padding: .8em 1em;
+    border: none;
+    font-size: 1em;
+}
+
+.search-icon {
+    color: #F27B50;
+    font-size: 20px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.filters-list li.input-group select {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    color: #F27B50;
+    font-weight: bold;
+    width: calc(100% - 0em);
+    background-position: right center;
+}
+
+.filters-list li.input-group input.search {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    color: #F27B50;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    font-family: 'Montserrat', sans-serif;
+    width: calc(100% - 0em);
+}
+
+.filters-list li.input-group input.search::placeholder {
+    color: #f7b197;
+    font-weight: bold;
+}
+
+.filters-list li.input-group input.date {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    color: #F27B50;
+    font-weight: bold;
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    font-family: 'Montserrat', sans-serif;
+    width: calc(100% - 0em);
+}
+
+.filters-list li.input-group input.date::placeholder {
+    color: #f7b197;
+    font-weight: bold;
+}
+
+.filters ul.collapsible {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2em;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.filters ul.collapsible li {
+    display: block;
+    padding: .85em 0;
+    position: relative;
+}
+
+.filters ul.collapsible li:after {
+    content: '';
+    background-image: url(../../../assets/img/icons/right_arrow_orange.png);
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    width: 2.2em;
+    height: 2.2em;
+    position: absolute;
+    right: 0;
+    top: .3em;
+    bottom: auto;
+    transition: all .2s;
+    opacity: .5;
+}
+
+.filters ul.collapsible li:hover {
+    cursor: pointer;
+    color: #F27B50;
+}
+
+.filters ul.collapsible li:hover:after {
+    opacity: 1;
+}
+
+.filters ul.collapsible li {
+    border-top: 1px solid var(--borderbottomcolor2);
+}
+
+.filters ul.collapsible li:first-child {
+    border-top: none;
+}
+
+.filters ul.collapsible li>ul {
+    list-style: none;
+    padding: 0 0 .5em 1em;
+    border-top: 1px solid var(--borderbottomcolor2);
+    display: none;
+}
+
+.filters ul.collapsible li>ul>ul {
+    list-style: none;
+    padding: 0 0 .5em 1em;
+    border-top: 1px solid var(--borderbottomcolor2);
+    display: none;
+}
+
+.filters ul.collapsible li.selected {
+    font-weight: bold;
+}
+
+.filters ul.collapsible li.selected:after {
+    opacity: 1;
+}
+
+.filters ul.collapsible li>ul {
+    display: block;
+}
+
+
+/* .filters ul.collapsible li.tree>a:after {
+    transform: rotate(90deg);
+} */
+
+.headerbar {
+    padding: 0 1vw;
+}
+
+.headerbar-container {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    display: flex;
+}
+
+.headerbar-container-padded {
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--borderbottomcolor);
+    display: flex;
+}
+
+.headerbar .header {
+    height: 4vw;
+    flex-grow: 0;
+    text-transform: capitalize;
+}
+
+.headerbar .header h3 span {
+    font-size: 0.7em;
+    color: #666;
+    font-weight: normal;
+    padding: 0 1em;
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    display: block;
+    padding: .8em 0 .4em 0;
+}
+
+p.inputs {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 45%;
+}

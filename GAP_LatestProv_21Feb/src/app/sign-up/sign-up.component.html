@@ -1,0 +1,103 @@
+<div class='wrapper'>
+
+    <app-header></app-header>
+
+    <div class="inline-form-centered">
+        <div class="inline-form-container">
+            <!-- <p style="color: #27cc27;">{{ verificationMessage }} <span class="link" (click)="resendEmail()" *ngIf="verMsgShown"> Resend Email</span></p> -->
+            <h4>Sign Up</h4>
+            <form method="post" autocomplete="on" action="/clients/tred-web-v0.1/index.php?page=signup#contact-us" [formGroup]="signUpFormGroup" (ngSubmit)="signUpSubmit($event)">
+                <p class="flex">
+                    <mat-form-field floatLabel="never" class="signupBlock">
+                        <input matInput type="text" name="name" value="" placeholder="Full Name *" formControlName="name" [errorStateMatcher]="matcher" />
+                        <mat-error *ngIf="nameFormControl?.hasError('required')">
+                            Name is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field floatLabel="never" class="signupBlock">
+                        <input matInput type="email" name="email" value="" placeholder="Email *" formControlName="email" [errorStateMatcher]="matcher" />
+                        <mat-error *ngIf="emailFormControl?.hasError('required')">
+                            E-mail is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="emailFormControl?.hasError('pattern')">
+                            Please enter a <strong>valid</strong> email address
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <!-- <p class="flex">
+                    <mat-form-field floatLabel="never" class="signupBlock"><input matInput type="tel" name="phone" value="" placeholder="Phone Number" formControlName="number" /></mat-form-field>
+                    <mat-form-field floatLabel="never" class="signupBlock"><input matInput type="url" name="website" value="" placeholder="Company URL" formControlName="companyURL" /></mat-form-field>
+                </p> -->
+                <p class="flex">
+                    <mat-form-field floatLabel="never" class="signupBlock">
+                        <input matInput type="email" name="refBy" value="" placeholder="Referred By (Email Id)" formControlName="refBy" [errorStateMatcher]="matcher"/>
+                        <mat-error *ngIf="refFormControl?.hasError('pattern')">
+                            Please enter a <strong>valid</strong> referral email address
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field floatLabel="never" class="signupBlock"><input matInput type="text" name="company" value="" placeholder="Company" formControlName="company" /></mat-form-field>
+                </p>
+                <p class="flex">
+                    <mat-form-field floatLabel="never" class="signupBlock passwordBlock">
+                        <input matInput [type]="hide ? 'password' : 'text'" name="signUpPassword" value="" placeholder="Password *" formControlName="signUpPassword" [errorStateMatcher]="matcher" />
+                        <mat-error *ngIf="signUpPasswordFormControl?.hasError('required')">
+                            Password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="signUpPasswordFormControl?.hasError('minlength')">
+                            Password must be at least 8 characters
+                        </mat-error>
+                        <mat-error class="error-text" *ngIf="signUpPasswordFormControl?.hasError('passwordStrength')">
+                            {{signUpFormGroup.get('signUpPassword').errors['passwordStrength']}}
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="margin-left: -6rem; margin-top: 0.5rem;">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button> -->
+                    <mat-form-field floatLabel="never" class="signupBlock">
+                        <input matInput placeholder="Confirm Password *" name="confpassword" type="password" formControlName="confpassword" [errorStateMatcher]="matcher" />
+                        <mat-error *ngIf="confpasswordFormControl?.hasError('required')">
+                            Confirmation of password is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="confpasswordFormControl.hasError('mismatch')">
+                            Passwords do not match
+                        </mat-error>
+                    </mat-form-field>
+                </p>
+                <p class="inline-form-error" style="padding: 0;" *ngIf="showSignUpErrorMessage">{{ signUpErrorMessage }}
+                </p>
+                <p style="color: #76fb08; padding: 0;" class="inline-form-error" *ngIf="showSignUpSuccessMessage">{{ signUpSuccessMessage }}&nbsp;<span class="link" (click)="resendEmail()" *ngIf="verMsgShown">Resend Email</span>
+                </p>
+                <p class="inline-form-error" style="padding: 0;" *ngIf="showResendErrorMessage">{{ resendErrorMessage }}
+                </p>
+
+                <p style="color: #76fb08; padding: 0;" class="inline-form-error" *ngIf="showResendSuccessMessage">{{ resendSuccessMessage }}&nbsp;<span class="link" (click)="resendEmail()" *ngIf="verMsgShown">Resend Email</span>
+                </p>
+                <!-- <p class="inline-form-error" style="padding: 0;" *ngIf="showVerifyErrorMessage">{{ verificationErrorMessage }}<span class="link" (click)="resendEmail()"> Resend Email</span>
+                </p> -->
+                <p style="margin-top: 1.5rem;">Already have an account? Click here to <span class="link" (click)="signInForm()">login</span>.</p>
+                <div class="inline-form-content">
+                    <div class="inline-form-submit">
+                        <p><input type="submit" value="Send Request" name="inlineform" /></p>
+                    </div>
+                    <div class="inline-form-disclaimer">
+                        <p>
+                            <mat-checkbox style="margin-right: 1rem;" [checked]="termChecked" (change)="updateTermChecked()"></mat-checkbox><label>I accept the terms and conditions</label></p>
+                        <p class="inline-form-error" style="padding: 0;" *ngIf="termError">{{ termError }}
+                        </p>
+                        <p><strong>Disclaimer:</strong> All PRODUCT, PRODUCT SPECIFICATIONS AND DATA ARE NOT SUBJECT TO RECOVERY, FUNCTION, RELIABILITY OR DESIGN OR OTHERWISE. </p>
+                        <p> Tredence Analytics Solutions Pvt Ltd., its affiliates, agents, and employees, and all persons acting on its or their behalf (collectively, “Tredence”), disclaim any and all liability for recovery of any kind of data shared and
+                            other associated matters. For any errors, inaccuracies or incompleteness Tredence disclaim any liability. </p>
+                        <p> Tredence makes no warranty, representation or guarantee regarding the operation and operation of ML Works. It is completely trial version of tool and operation of ML Works registrars will be using.</p>
+                        <p> Tredence has full rights of trial offer and can use its rights to suspend or close the trial offer at any time without prior notice. </p>
+                        <p>All statements regarding the suitability of product or its operation are based on Tredence’s knowledge in generic scenario. As product is supposed to be used for trial, Tredence shall not take any responsibility for the data shared
+                            for use of product and of the applications and performances described in the product specifications. Tredence reserves the right to suspend or close trial at any point of time or after 45-day trial period.</p>
+                        <p> To read the detailed EULA agreement please <a href="javascript:void(0)" (click)="openPDF(pdftype.eulaAgreement);">click here</a> </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+
+</div>

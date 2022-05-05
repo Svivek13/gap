@@ -1,0 +1,91 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded" style="height: 16vw;">
+                <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Churn Rate</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value">{{ overallChurn }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Churn Rate by Product Mix</h4>
+                        <p class="description-chart" *ngIf="prodMixChartReady"><strong>{{highestProduct}}</strong> has the highest churn rate while <strong>{{lowestProduct}}</strong> has the lowest churn rate</p>
+                    </div>
+                    <app-bar-chart *ngIf="prodMixChartReady" [barChartData]="prodMixChartData" [barChartLabels]="prodMixChartLabels" [barChartLegend]=false [barChartColors]="metricColors" xLabel="Product Mix" yLabel="Churn Rate" yAxisRep="percentage"></app-bar-chart>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="description" *ngIf="prodMixChartReady">
+            <p><strong>{{highestProduct}}</strong> has the highest churn rate while <strong>{{lowestProduct}}</strong> has the lowest churn rate</p>
+        </div> -->
+    </div>
+
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded smallchart">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Overall Monthly Revenue</h4>
+                    </div>
+                    <div style="margin: auto;">
+                        <app-pie-chart *ngIf="pieChartReady" [pieChartData]="monthlyRevenueChartData" [pieChartLabels]="monthlyRevenueChartLabels" [pieChartColors]="pieChartColors" [revenues]="revenues"></app-pie-chart>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row alert">
+                            <h4 class="label">Churn Rate by Interactions</h4>
+                            <p class="description-chart" *ngIf="metricChartReady && metricSelected === 'Tech Support'">A majority of the churning customers do not contact Tech Support</p>
+                        </div>
+                        <div class="chartSettings">
+                            <span class="dropdownSpan">
+                          <label class="axisLabel">Metric</label>
+                          <mat-form-field class="chartDropdown" [floatLabel]="'never'">
+                              <mat-select [(ngModel)]="metricSelected" (selectionChange)="changeTelcoMetric($event)">
+                                  <mat-option *ngFor="let metric of metrics" [value]="metric">
+                                      {{metric}}
+                                  </mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                        </span>
+                        </div>
+                    </div>
+                    <app-bar-chart yAxisRep="percentage" *ngIf="metricChartReady" [barChartData]="metricData" [barChartLabels]="metricLabels" [barChartLegend]=false [barChartColors]="churnColors" yLabel="Churn Rate" [xLabel]="metricSelected"></app-bar-chart>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="description" *ngIf="metricChartReady && metricSelected === 'Tech Support'">
+            <p>A majority of the churning customers do not contact Tech Support</p>
+        </div> -->
+
+        <div class="widget-holder-row">
+            <div class="widget overview ">
+                &nbsp;
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row alert">
+                        <h4 class="label">Tenure v/s Avg. Monthly Charges</h4>
+                        <p class="description-chart">Avg monthly revenue from a customer increases linearly with the customer tenure</p>
+                    </div>
+                    <div style="display: block">
+                        <canvas baseChart width="150" height="40" *ngIf="comboChartReady" [datasets]="tenureAvgChartData" [labels]="tenureAvgChartLabels" [options]="comboChartOptions" [legend]="comboChartLegend" [chartType]="comboChartType" [colors]="mixColors"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

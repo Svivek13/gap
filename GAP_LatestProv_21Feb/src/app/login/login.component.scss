@@ -1,0 +1,274 @@
+input {
+    outline: none;
+}
+
+.link {
+    text-decoration: underline;
+    color: #F27B50;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-form-field {
+    display: block !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    margin-top: 0.8rem;
+    margin-left: 1rem;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    border-top: 0 solid transparent;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    color: #525f7f !important;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white !important;
+}
+
+.mat-input-element {
+    color: white !important;
+}
+
+.link {
+    text-decoration: underline;
+    color: #F27B50;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+:host ::ng-deep .mat-checkbox-frame {
+    width: 12px;
+    height: 12px;
+    border-width: 0px;
+    background-color: white;
+}
+
+.container {
+    width: auto;
+    height: auto;
+    position: relative;
+}
+
+a.button {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border-radius: 0.4em;
+    border: 1px solid #fff;
+    color: #fff;
+}
+
+a.button:hover {
+    background-color: #F27B50;
+    border-color: #F27B50;
+}
+
+input[type='email'],
+input[type='text'],
+input[type='url'],
+input[type='tel'],
+input[type='password'] {
+    background: #4A4C51;
+    border-radius: 0.4em;
+    padding: 1em 1vw;
+    border: none;
+    font-size: 1em;
+    width: 38vw;
+    border: 1px solid #4A4C51;
+    margin-bottom: 1em;
+    color: #fff;
+}
+
+input[type='email']:nth-child(odd),
+input[type='text']:nth-child(odd),
+input[type='url']:nth-child(odd),
+input[type='tel']:nth-child(odd),
+input[type='password']:nth-child(odd) {
+    margin-right: 4vw;
+}
+
+input[type='email']::placeholder,
+input[type='text']::placeholder,
+input[type='url']::placeholder,
+input[type='tel']::placeholder,
+input[type='password']::placeholder {
+    color: #7b7e86;
+}
+
+label {
+    font-weight: bold;
+    color: #fff;
+}
+
+:host ::ng-deep .mat-checkbox-inner-container,
+:host ::ng-deep .mat-checkbox-frame {
+    width: 1.5em !important; // 2em to 1.5em for Naveen's UX point, check with Shubho. Done in signup too
+    height: 1.5em !important;
+}
+
+input[type='checkbox']:checked {
+    background-position: left center;
+}
+
+input[type='submit'] {
+    background: #F27B50;
+    border-radius: 0.4em;
+    padding: 1em 1vw;
+    border: none;
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+    width: 17vw;
+    margin-right: 1vw;
+    border: 1px solid #F27B50;
+    cursor: pointer;
+}
+
+input[name='loggingIn'] {
+    background: #F27B50;
+    border-radius: 0.4em;
+    padding: 1em 1vw;
+    border: none;
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+    width: 15vw;
+    margin-right: 1vw;
+    border: 1px solid #F27B50;
+    cursor: pointer;
+    text-align: center;
+}
+
+input[type='submit']:hover {
+    background-color: #f06938;
+    border-color: #f06938;
+}
+
+.inline-form,
+.inline-form-centered {
+    background-color: #252830;
+    color: #fff;
+    width: 85vw;
+    height: auto;
+    padding: 4vw 7vw 7vw 7vw;
+}
+
+.inline-form .messages,
+.inline-form-centered .messages {
+    padding: 1em 0;
+    border: none;
+    font-size: 1em;
+    border-top: 1px solid #4A4C51;
+    margin-bottom: 1em;
+    color: #fff;
+    width: 86vw;
+    margin-top: 1em;
+}
+
+.inline-form .messages p,
+.inline-form-centered .messages p {
+    padding: 0;
+    margin: 0;
+}
+
+.inline-form .inline-form-content,
+.inline-form-centered .inline-form-content {
+    display: flex;
+}
+
+.inline-form .inline-form-content .inline-form-submit,
+.inline-form-centered .inline-form-content .inline-form-submit {
+    width: 25%;
+}
+
+.inline-form .inline-form-content .inline-form-disclaimer,
+.inline-form-centered .inline-form-content .inline-form-disclaimer {
+    width: 70%;
+    font-size: 0.8em;
+    color: #b3b3b3;
+    border-left: 1px solid #999999;
+    padding-left: 5%;
+}
+
+.inline-form .inline-form-error,
+.inline-form-centered .inline-form-error {
+    color: #FF4545;
+    padding: 1em 0;
+    width: 38vw;
+    font-size: 0.8em;
+}
+
+.inline-form-success {
+    color: #76fb08;
+    padding: 1em 0;
+    width: 38vw;
+    font-size: 0.8em;
+}
+
+.inline-form-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 7.5vw;
+}
+
+.inline-form-centered .inline-form-container-login {
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+}
+
+.inline-form-centered .inline-form-container-login .login {
+    width: 50%;
+}
+
+.inline-form-centered .inline-form-container-login .login .inline-form-disclaimer {
+    width: 42%;
+    border-left: none;
+}
+
+.inline-form-centered .inline-form-container-login .login .inline-form-submit {
+    width: 42%;
+}
+
+.inline-form-centered .inline-form-container-login .banner {
+    width: 50%;
+    border-left: 1px solid #999999;
+     background-image: url(../../assets/img/ml-works-logo.png);
+    background-repeat: no-repeat;
+    background-position: 4vw center;
+    background-size: 20vw auto;
+}
+
+// .banner .banner_side {
+//     text-align: center;
+//     margin-top: 1em;
+//     font-size: 4em;
+// }
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+    background-color: #f1a386 !important;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 40%;
+    right: 45%;
+}
+
+.green {
+    color: #76fb08 !important;
+}

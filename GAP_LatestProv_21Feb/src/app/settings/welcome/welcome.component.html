@@ -1,0 +1,101 @@
+<div class="body">
+
+    <h2>Hi {{userName}}, Welcome to <span class="theme-color">ML Works!</span></h2>
+
+    <p>You have access to Tredence’s free community edition of ML Works.</p>
+
+    <br>
+
+    <div class="video_container">
+        <div>
+            <h4>What is ML Works?</h4>
+            <p>ML Works is an enterprise grade model monitoring platform that enables organizations to monitor its ML models at scale in production.</p>
+            <p>This community version of ML Works is primarily aimed towards Data Scientists and Data Engineers who would like to play around with the tool and also use this tool to try out some of the features like Drift and Explainability.</p>
+            <p>The Machine Learning lifecycle has the following stages: Build, Deploy, Monitor and Maintain. ML Works aims at showcasing how “model monitoring” can be streamlined and automated, giving precious time back to data scientists to solve new problems.
+                Learn how ML Works helps you identify model degradation over time and get a better understanding of ML output.</p>
+
+            <br>
+
+            <h4>How should you use ML Works?</h4>
+            <p>You can use ML works in the following ways:</p>
+        </div>
+
+        <!-- <div>
+            <youtube-player [videoId]="videoId" suggestedQuality="highres" [height]="250" [width]="500">
+            </youtube-player>
+        </div> -->
+
+    </div>
+
+    <ul>
+        <li>
+            <p><strong>System Projects:</strong> Explore ML Works by browsing through our pre-loaded projects (with accessible data and model objects).</p>
+        </li>
+        <ul>
+            <li>
+                <p>You can access these projects by going to the Overview tab (<img src="../../../assets/img/icons/dark/overview.png" class="graph"> → Icon on the top ribbon ) which gives you a quick summary of the executions.</p>
+            </li>
+            <li>
+                <p>You can also see the results of our Drift detection module which shows you how the test data distribution is different than the training data along with feature contribution to drift summarized in a dashboard.</p>
+            </li>
+            <li>
+                <p>Check out our Explainability module which calculates the feature importance both at a global as well as local level</p>
+            </li>
+        </ul>
+        <li>
+            <p><strong>Upload your own dataset:</strong> Once you’ve played around with the system projects, you can now try and upload your own dataset to explore some of these features even further.</p>
+        </li>
+        <ul>
+            <li>
+                <p>Upload your own data set and model file by click on + icon on the top ribbon.</p>
+            </li>
+            <li>
+                <p>If you would like to understand if your test data has drifted from your training dataset, try running the drift module on the same.</p>
+            </li>
+            <li>
+                <p>If you would like to explain your model predictions better, run the Explainability module on your dataset. You can deep dive into specific data points to understand the exact features that determined the model output. In this case you
+                    would also need to upload your model file.</p>
+            </li>
+        </ul>
+    </ul>
+    <p>For any further questions you can refer to the <span class="link" (click)="linkPages('faq')">FAQ document</span> or reach out to us using our <span class="link" (click)="linkPages('feedback')">support form</span> in case few of your questions are
+        unanswered.
+    </p>
+    <p>There is an in-built guided tour which you can activate by clicking on the “Automated Tour” (<img src="../../../assets/img/icons/tour.png" class="graph"> → Icon on the top ribbon).</p>
+
+    <br>
+
+    <h4>ML Works Capabilities</h4>
+    <p>There are 4 major modules in ML Works:</p>
+    <ul>
+        <li>
+            <p><strong>Drift Detection</strong></p>
+            <p>Our model agnostic library detects the change in data distribution between the training and production/tagging datasets (called ‘testing data’ within the platform), this indicates the degradation of models due to covariate shift or data drift.
+                To know more about the concepts in use, please refer to the technical documentation of our drift library</p>
+        </li>
+        <li>
+            <p><strong>Explainable AI</strong></p>
+            <p>Using the concepts of Shapley values we have created a custom library to enable you to understand model output. The library also allows you to drill down to a single prediction for local explanations. To know more about the concepts in use,
+                please refer to the technical documentation of our Explainable AI library</p>
+        </li>
+        <li>
+            <p><strong>MLOps Graph</strong></p>
+            <p>As ML codes in the pipeline can grow upto 100s of lines, it becomes difficult to manage. ML Works transforms the pipeline code into a visual graph to track the execution more efficiently. We aim at making debugging faster and easier to reduce
+                production downtime. For this trial version, our system projects have been equipped with the MLOps Graph. Refer to the 'Graph' column in the overview page to access the MLOps graph.
+            </p>
+        </li>
+        <li>
+            <p><strong>Persona Dashboard</strong></p>
+            <p>We believe that in a business there are people from different functions other than Data Scientists who look at the output of a Machine Learning model but through a very different lens. We have broadly broken these users down into 3 personas
+                - Data Scientist, Data Engineer and Business User. Our dashboard generates metrics relevant to each one of these users to clear the clutter for them. Click on <img src="../../../assets/img/icons/dark/insight.png" class="graph"> on the
+                top ribbon or the play button from the overview page to access the persona dashboard.</p>
+        </li>
+    </ul>
+
+    <p>We thank you again for joining us on this journey to create the best MLOps platform for the industry, enjoy your time using ML Works!</p>
+
+    <br>
+
+    <p>Team <span class="theme-color"><strong>ML Works</strong></span></p>
+
+</div>

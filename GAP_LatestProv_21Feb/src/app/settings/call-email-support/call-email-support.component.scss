@@ -1,0 +1,154 @@
+.views {
+    width: auto;
+    min-width: 85vw;
+    max-width: 85vw;
+    border-left: 1px solid var(--borderbottomcolor);
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    display: block;
+    padding: .8em 0 .4em 0;
+}
+
+.views .formholder {
+    padding: 0 1vw;
+}
+
+.views .formholder-container {
+    border-bottom: none;
+}
+
+.formholder {
+    padding: 0 8vw;
+}
+
+.formholder h4 {
+    font-size: 1em;
+}
+
+.formholder-container {
+    border-bottom: 1px solid #B2BEC0;
+    display: flex;
+    flex-direction: row;
+    padding: 1.5em 0;
+    position: relative;
+}
+
+.formholder-inputs {
+    width: 44%;
+}
+
+.formholder-inputs .input-group {
+    width: 100%;
+    padding-bottom: .8em;
+    position: relative;
+}
+
+.formholder-inputs .input-group:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-inputs .input-sections {
+    padding-bottom: 1em;
+}
+
+.formholder-inputs .input-sections:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-helps {
+    width: 50%;
+    padding: 0 2vw;
+    border-left: 1px solid var(--borderbottomcolor);
+}
+
+.formholder.formend .formholder-container {
+    border: none;
+}
+
+button {
+    text-decoration: none;
+    padding: 1em 1.4em;
+    border-radius: 0.35em;
+    color: #807b77;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: .5em;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #f7f7f7;
+}
+
+button.primary {
+    background-color: #F27B50;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #F27B50;
+}
+
+button.secondary {
+    background-color: transparent;
+    border: 1px solid #F27B50;
+    color: #F27B50;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+}
+
+input,
+.textarea {
+    display: block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    padding: .8em 1em;
+    background-color: #fff;
+    border: none;
+    font-size: 1em;
+    width: calc(100% - 3em);
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    color: black;
+}
+
+input::placeholder,
+.textarea::placeholder {
+    color: #e3e3e3;
+}
+
+.textarea:focus {
+    outline: none;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-form-field {
+    display: block !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    margin-top: 0.6rem;
+    margin-left: 0.8rem;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    border-top: 0 solid transparent;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white !important;
+}

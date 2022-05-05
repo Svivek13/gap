@@ -1,0 +1,139 @@
+.label {
+    color: var(--fontcolor2); //#6b6b6b;
+}
+
+.data_table{
+    width: 100%;
+}
+.mat-header-cell {
+     color: #F27B50; 
+     font-weight: 600;
+}
+
+.widget-holder {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    padding-bottom: 1em;
+    margin: 0 1em 1em;
+    padding-top: 1em;
+}
+
+
+.widget.opaque {
+    background-color: var(--cardcolor);
+    width: calc(100% - 3em);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.05);
+}
+
+.views {
+    width: auto;
+    min-width: 85vw;
+    max-width: 85vw;
+}
+
+.widget-holder .description {
+    margin-left: 23vw;
+}
+
+// .widget-holder .description p {
+//     // max-width: 40vw;
+// }
+
+.widget-holder-row {
+    
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    // padding-bottom: 1em;
+}
+
+.widget.rounded {
+    border-radius: .5em;
+}
+
+.widget.overview {
+    // max-width: 20vw;
+    // min-width: 20vw;
+    // max-height: 17vw;
+    padding: 1em;
+}
+
+.widget.overview .wrapperDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.widget.overview .wrapperDiv .overview-row {
+    min-height: 2vw;
+}
+
+.widget.overview .wrapperDiv .overview-row:nth-child(2) {
+    flex-grow: 1;
+    min-height: 8vw;
+    display: flex;
+    align-items: center;
+}
+
+.widget.overview .wrapperDiv .value {
+    font-size: 1em;
+    color: var(--fontcolor2); //#6b6b6b;
+    padding: 0.6em;
+    padding-left: 0;
+}
+
+.widget.overview .wrapperDiv .version {
+    color: #F27B50;
+    font-weight: bold;
+}
+
+.widget.chart {
+    max-width: 85vw;
+    width: 82vw;
+    min-width: 60vw;
+    min-height: 16vw;
+    padding: 0.5em 1em 1em 1em;
+}
+
+.widget.chartrow {
+    // max-width: 39vw;
+    // min-width: 39vw;
+    // min-height: 16vw;
+    // height: 16vw;
+    padding: 0.5em 1em 1em 1em;
+}
+
+.widget.chart .wrapperDiv .chart-row {
+    min-height: 2vw;
+    position: relative;
+}
+
+.widget.chart .wrapperDiv .chart-row.alert:after {
+    content: '';
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    width: 2.2em;
+    height: 2.2em;
+    position: absolute;
+    right: 0;
+    top: .3em;
+    bottom: auto;
+    transition: all .2s;
+    opacity: 1;
+}
+
+.widget img {
+    width: 100%;
+    height: auto;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 45%;
+}
+
+.first{
+    color: red !important;
+}

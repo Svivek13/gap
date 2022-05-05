@@ -1,0 +1,165 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="views" *ngIf="timelinessData">
+    <div class="widget-holder">
+
+        <div class="widget-holder-row" *ngIf="chartReady">
+            <div class="widget overview opaque rounded">
+                <div class="chart-row">
+                    <span class="lastModified">Last Modified : {{insertDateCompleteness}}</span>
+                    <h4 class="label"> Completeness <span class="colorFont">{{overAllcompletness}}</span></h4>
+
+                    <p class="description-chart">Shows the level of missing or unstable data among the attributes for
+                        the selected table.</p>
+                </div>
+                <div class="filters">
+                    <div class="filters-wrapper">
+                        <div class="form-control formCls">
+                            <form [formGroup]="filterFormGroup" style="display:flex"
+                                (ngSubmit)="getCompletenessResult()">
+                                <!-- <div class="input-group">
+                                    <label>Model</label>
+                                    <input matInput type="text" class="search" placeholder="Search Model"
+                                        [formControl]="filterFormGroup.get('model')" [matAutocomplete]="auto1" />
+                                    <mat-autocomplete #auto1="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnAttr">
+                                        <mat-option *ngFor="let option of modelFilterOptions" [value]="option"
+                                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                            {{option}}
+                                        </mat-option>
+            
+                                    </mat-autocomplete>
+            
+                                </div> -->
+                                <div class="input-group">
+                                    <label>Table</label>
+                                    <input matInput type="text" class="search" placeholder="Search Attribute"
+                                        [formControl]="filterFormGroup.get('tableval')" [matAutocomplete]="auto2" />
+                                    <mat-autocomplete #auto2="matAutocomplete" [panelWidth]="180"
+                                        [displayWith]="displayFn">
+                                        <mat-option *ngFor="let options of tablefilterOptions" [value]="options"
+                                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                            {{options}}
+                                        </mat-option>
+
+                                    </mat-autocomplete>
+                                </div>
+
+                                <button mat-raised-button type="submit" color="primary"
+                                    style="height: 26px;margin-top: 14px">Submit</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="widget chart">
+                    <div class="wrapperDiv">
+
+                        <app-horizontal-bar-chart *ngIf="chartReady" chartName="completeness"
+                            [datasets]="globalChartDataSegRev" [labels]="globalChartLabelsSegRev"
+                            [colors]="globalColors" xLabel="" yLabel="" [max]="max5">
+
+                        </app-horizontal-bar-chart>
+                        <app-chart-paginator *ngIf="chartReady" [totalLength]="globalLengthSegRev" personaType="completeness"
+                            (prevClickEvent)="showPrevFeaturesSegRev($event)"
+                            (nextClickEvent)="showNextFeaturesSegRev($event)">
+                        </app-chart-paginator>
+                    </div>
+                </div>
+            </div>
+            <div class="widget overview opaque rounded">
+                <div class="chart-row">
+                    <span class="lastModified">Last Modified : {{insertDate}}</span>
+                    <h4 class="label"> Uniqueness</h4>
+
+                    <p class="description-chart"> Shows the level of non-duplicates in primary attributes for the
+                        respective tables.</p>
+                </div>
+                <div class="widget chart" style="padding-top: 4em;">
+                    <div class="wrapperDiv">
+
+                        <app-horizontal-bar-chart *ngIf="chartReady2" chartName="completeness"
+                            [datasets]="globalChartDataUniqueness" [labels]="globalChartLabelsUniqueness"
+                            [colors]="globalColors" xLabel="" yLabel="" [max]="max">
+
+                        </app-horizontal-bar-chart>
+                        <app-chart-paginator *ngIf="chartReady2" [totalLength]="globalLengthUniqueness" personaType="completeness"
+                            (prevClickEvent)="showPrevFeaturesUniqueness($event)"
+                            (nextClickEvent)="showNextFeaturesUniqueness($event)">
+                        </app-chart-paginator>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="widget overviews opaque rounded" *ngIf="timelinessData">  
+            <!-- <div class="widget-holder-row"> -->
+                <h4>Timeliness</h4>
+                <p class="description-chart"> Shows the list of tables with their Last Updated Date to check the availability of latest data.</p>
+            <!-- </div> -->
+            <div class="widget opaque rounded" >
+                <table mat-table [dataSource]="timelinessData" class="data_table" matSort>   
+    
+                    <ng-container matColumnDef="TableName">
+                        <th mat-header-cell *matHeaderCellDef>Table Name </th>
+                        <td mat-cell *matCellDef="let element" > {{element.table_name}} </td>
+                    </ng-container>   
+    
+                    <ng-container matColumnDef="Status">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element" [ngClass]="{'first': element.status == 'Not_Updated' }"> {{element.status}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="Schedule">
+                        <th mat-header-cell *matHeaderCellDef>Schedule </th>
+                        <td mat-cell *matCellDef="let element" > {{element.schedule}} </td>
+                    </ng-container>   
+    
+                    <ng-container matColumnDef="LastUpdatedOn">
+                        <th mat-header-cell *matHeaderCellDef> Last Updated On </th>
+                        <td mat-cell *matCellDef="let element" > {{element.LastUpdatedOn}} </td>
+                    </ng-container>   
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row class="data_table" *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+    
+    
+    
+    
+            </div>
+        </div>
+    </div>
+   
+    <!-- <div class="widget-holder">
+        <div class="widget-holder-row">
+            <h4>
+                Uniqueness
+            </h4>
+            <div class="widget overview opaque rounded" *ngIf="uniquenessResult">
+                <table mat-table [dataSource]="uniquenessResult" class="data_table" matSort>
+
+                  
+                    <ng-container matColumnDef="Table_Name">
+                        <th mat-header-cell *matHeaderCellDef>Table Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.table}} </td>
+                    </ng-container>
+
+                  
+                    <ng-container matColumnDef="Value">
+                        <th mat-header-cell *matHeaderCellDef> Value </th>
+                        <td mat-cell *matCellDef="let element"> {{element.uniquenessScore}} </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsUniquness"></tr>
+                    <tr mat-row class="data_table" *matRowDef="let row; columns: displayedColumnsUniquness;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+              
+
+
+            </div>
+        </div>
+    -->
+</div>

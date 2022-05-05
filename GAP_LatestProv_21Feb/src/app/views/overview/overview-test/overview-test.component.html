@@ -1,0 +1,126 @@
+<app-common-header></app-common-header>
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="module_body">
+	<nav class="headerbar">
+		<div class="headerbar-container" style="padding: 0 1em;">
+			<div class="header">
+				<h3>Cockpit View of All the Models</h3>
+			</div>
+		</div>
+	</nav>
+	<div class="view-container">
+
+		<!-- <div class="filters">
+			<div class="filters-wrapper">
+				<div class="filters-meta">
+						<p>Showing results for <strong>Customer Churn, End date of 01 Jan or before, Drift greater than 10%, Data Quality greater than 60% and Error of more than 30%</strong></p>
+					</div>
+				<div class="filters-meta">
+					<h4 joyrideStep="step16" title="{{tours.step16.title}}" text="{{tours.step16.text}}">Filters</h4>
+				</div>
+				<ul class="filters-list" [formGroup]="filtersForm">
+					<li class="link" (click)="clearFiltersForm($event)">Clear All</li>
+					<li class="input-group">
+						<label>Model Name</label>
+						<mat-form-field class="select" [floatLabel]="'never'">
+							<mat-select formControlName="projectType" (selectionChange)="getBrand()">
+								<mat-option *ngFor="let option of projectTypes" [value]="option.value">
+									{{option.show}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</li>
+					<li class="input-group">
+						<label>Brand Name</label>
+						<div class="flex">
+							<input matInput type="text" class="projSearch" placeholder="Select project" value=""
+								(keyup)='keyUp.next($event.target.value)' formControlName="projectName"
+								(blur)="projectNameSearchBlur($event)" />
+							<mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+								(mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon>
+						</div>
+					</li>
+					<li class="input-group">
+						<label>Start Date</label>
+						<mat-form-field class="date" floatLabel="never">
+							<input matInput [matDatepicker]="startPicker" placeholder="Select start date"
+								(dateChange)="startDateChange('change', $event)" formControlName="startDate">
+							<mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+							<mat-datepicker #startPicker></mat-datepicker>
+						</mat-form-field>
+					</li>
+					<li class="input-group">
+						<label>End Date</label>
+						<mat-form-field class="date" floatLabel="never">
+							<input matInput [matDatepicker]="endPicker" placeholder="Select end date"
+								(dateChange)="endDateChange('change', $event)" formControlName="endDate">
+							<mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+							<mat-datepicker #endPicker></mat-datepicker>
+						</mat-form-field>
+					</li>
+					<li class="input-group">
+						<label>Drifted By</label>
+						<mat-form-field class="select" [floatLabel]="'never'">
+							<mat-select formControlName="driftBy" (selectionChange)="driftMorethan($event)">
+								<mat-option *ngFor="let option of driftBy" [value]="option.value">
+									{{option.show}}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</li>
+
+				</ul>
+			</div>
+		</div> -->
+		<div class="views" style="margin-top: 23px;">
+			<div class="widget opaque rounded">
+				<table mat-table #outerSort="matSort" [dataSource]="dataSource" multiTemplateDataRows
+					class="mat-elevation-z8 data_table" matSort>
+					<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay ; let i = index">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+						<td mat-cell *matCellDef="let element">
+							<p (click)="goTo(column,element.Name)" style="min-height: 2.7vh;"
+								[ngClass]="{ 'detail': column === 'View', 'graph': column === 'Graph', 'icon':  (column === 'Graph' || column === 'View') }">
+								{{element[column]}}</p>
+						</td>
+					</ng-container>
+
+					<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+					<ng-container matColumnDef="expandedDetail">
+						<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+							<div class="example-element-detail" *ngIf="element.child?.data.length"
+								[@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+								<div class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+
+									<table #innerTables mat-table #innerSort="matSort" [dataSource]="element.child"
+										matSort>
+										<ng-container matColumnDef="{{innerColumn}}"
+											*ngFor="let innerColumn of innerDisplayedColumns">
+											<th mat-header-cell *matHeaderCellDef mat-sort-header> {{innerColumn}} </th>
+											<td mat-cell *matCellDef="let element">
+												<p style="min-height: 2.7vh;" (click)="getDrilldwonDataView(innerColumn,element.Name,element.brand,element.card_type,element.location,element.model_type)"
+													[ngClass]="{ 'detail': innerColumn === 'View', 'graph': innerColumn === 'Graph', 'icon':  (innerColumn === 'Graph' || innerColumn === 'View') }">
+													{{element[innerColumn]}}</p>
+											</td>
+										</ng-container>
+										<tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+										<tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;"></tr>
+									</table>
+								</div>
+							</div>
+						</td>
+					</ng-container>
+
+					<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+					<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+						[class.example-element-row]="element.child?.data.length"
+						[class.example-expanded-row]="expandedElement === element" (click)="toggleRow(element)">
+					</tr>
+					<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+</div>

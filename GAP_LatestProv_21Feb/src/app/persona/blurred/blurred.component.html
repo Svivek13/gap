@@ -1,0 +1,89 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="blocker">
+        <div class="blocker-text">
+          <h4>Stay Tuned !</h4>
+          <p>Will be integrated with the Feedback Loop.</p>
+          <!-- <p><a class="link" [routerLink]="['/help']" [queryParams]="{name: 'Provide Feedback'}">Click here to reach us for more info</a></p> -->
+        </div>
+      </div>
+  <div class="widget-holder blur">
+    <div class="widget-holder-row">
+      <div class="widget overview opaque rounded">
+        <div class="wrapper">
+          <div class="overview-row"><h4 class="label">Overall Drift</h4></div>
+          <div class="overview-row"><h4 class="value">26.8%</h4></div>
+          <div class="overview-row">
+            <p>
+              Explain what this is. Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="widget chart">
+        <div class="wrapper">
+          <div class="chart-row alert"><h4 class="label">Drift Trend</h4></div>
+          <img src="assets/img/chart/line-chart/single-line-export.png" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="widget-holder blur">
+    <div class="widget-holder-row">
+      <div class="widget overview">
+        <p>
+          Explain what this is. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Suspendisse ut nunc nisi. Ut vehicula, massa non
+          iaculis sagittis, tortor diam scelerisque enim, vitae lobortis orci
+          urna sit amet justo. Nunc quis luctus lacus, eu euismod augue.
+        </p>
+      </div>
+      <div class="widget chart">
+        <div class="wrapper">
+          <div class="chart-row alert"><h4 class="label">Feature 1</h4></div>
+          <img src="assets/img/chart/line-chart/single-line-export-2.png" />
+        </div>
+      </div>
+      <!-- Clicking on this opens the next chart -->
+    </div>
+    <div class="widget-holder-row">
+      <div class="widget overview">
+        <p>
+          Explain what this is. Lorem ipsum dolor sit amet, consectetur
+          adipiscing elit. Suspendisse ut nunc nisi. Ut vehicula, massa non
+          iaculis sagittis, tortor diam scelerisque enim, vitae lobortis orci
+          urna sit amet justo. Nunc quis luctus lacus, eu euismod augue.
+        </p>
+      </div>
+      <div class="widget chart">
+        <div class="wrapper">
+          <div class="chart-row alert">
+            <h4 class="label">Testing Vs Training Comparison</h4>
+          </div>
+          <img
+            src="assets/img/chart/column-chart/negative-potive-column.png"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="description">
+      <p>
+        Explain what this is. Lorem ipsum dolor sit amet, consectetur adipiscing
+        elit. Suspendisse ut nunc nisi. Ut vehicula, massa non iaculis sagittis,
+        tortor diam scelerisque enim, vitae lobortis orci urna sit amet justo.
+        Nunc quis luctus lacus, eu euismod augue.
+      </p>
+    </div>
+
+    <svg:svg>
+      <!-- Filter -->
+      <svg:filter id="blurLayer">
+        <!-- Blur and attributes -->
+        <svg:feGaussianBlur stdDeviation="0.99" />
+      </svg:filter>
+    </svg:svg>
+  </div>
+</div>

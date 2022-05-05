@@ -1,0 +1,63 @@
+<div class="views">
+    <div class="page-meta">
+        <div class="page-meta-container">
+            <div *ngIf="filesLength.train" class="tile">
+                <div class="tile-label">Training <br>Files</div>
+                <div class="tile-value">{{filesLength.train}}/2</div>
+            </div>
+            <div *ngIf="filesLength.test" class="tile">
+                <div class="tile-label">Testing <br>Files</div>
+                <div class="tile-value">{{filesLength.test}}/10</div>
+            </div>
+            <div *ngIf="modelName" class="tile-text">
+                <div class="tile-text-label">Model Type</div>
+                <div class="tile-text-value capitalize">{{ modelName }}</div>
+            </div>
+            <div class="tile-text">
+                <div class="tile-text-label">Execution Type</div>
+                <div class="tile-text-value capitalize">{{ executionType }}</div>
+            </div>
+            <div class="refresh">
+                <!-- <button style="margin: 1rem; margin-left: -6.5rem; width: 110px;" class="primary" [disabled]="isRefreshing" (click)="refreshSummaryTable()">
+                    <img *ngIf="isRefreshing" style="width: 10px;" src="assets/img/refresh.gif" />
+                    Refresh
+                </button> -->
+                <button class="refreshButton" (click)="refreshSummaryTable()" [disabled]="isRefreshing">
+                  <mat-icon class="material-icons refreshIcon" matTooltip="Refresh" matTooltipPosition="above">
+                    refresh
+                  </mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="widget opaque rounded">
+        <table mat-table [dataSource]="dataSource" class="data_table" matSort>
+            <ng-container matColumnDef="{{column.field}}" *ngFor="let column of columnsToDisplay; let i = index;">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <p class="sort">{{column.header}}</p>
+                </th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'centerAlign': column.header === 'Status' }">
+                    <p [ngClass]="{'status': column.header === 'Status', 'green': column.header === 'Status' && element.statuss === 'Success', 'orange':  column.header === 'Status' && (element.statuss === 'In Progress' || element.statuss === 'Running'), 'red': column.header === 'Status' && element.statuss === 'Failed'}"
+                        [matTooltip]="column.header === 'Status' ? element.statuss : ''" matTooltipPosition="above" style="min-height: 2.7vh;">{{element[column.field]}}</p>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="addExecution">
+                <th mat-header-cell *matHeaderCellDef>
+                    <p style="text-align: center;" class="button">
+                        <mat-icon [ngClass]="{'hide': adminProjectOrNot === 'y' }" class="material-icons add-icon" matTooltip="Add Execution" matTooltipPosition="above" (click)="openAddExecution($event)">
+                            add_circle_outline
+                        </mat-icon>
+                    
+                    </p>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <p class="play-icon" (click)="runExec(element)" matTooltip="Dashboard" matTooltipPosition="above">
+                    </p>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsProps"></tr>
+            <tr mat-row class="data_table" *matRowDef="let row; columns: columnsProps;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

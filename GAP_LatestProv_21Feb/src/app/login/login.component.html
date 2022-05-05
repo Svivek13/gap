@@ -1,0 +1,98 @@
+<div class='wrapper'>
+
+    <app-header></app-header>
+
+    <!-- Login -->
+    <mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+    <div class="disable-background" *ngIf="loader"></div>
+
+    <div class="inline-form-centered" id="contact-us" *ngIf="signIn">
+        <div class="inline-form-container-login">
+            <div class="login">
+                <h4>Login</h4>
+                <form method="post" autocomplete="on" action="/clients/tred-web-v0.1/index.php?page=login#contact-us" [formGroup]="formGroup" (ngSubmit)="userloginSubmit($event)">
+                    <p style="margin: -0.25em 0em !important;">
+                        <mat-form-field floatLabel="never">
+                            <input matInput type="email" name="loginemail" value="" placeholder="your.name@domain.com" formControlName="loginemail" [errorStateMatcher]="matcher" />
+                            <mat-error *ngIf="loginEmailFormControl?.hasError('required') && loginEmailFormControl?.touched">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="loginEmailFormControl?.hasError('pattern')  && loginEmailFormControl?.touched">
+                                Please enter a <strong>valid</strong> email address
+                            </mat-error>
+                        </mat-form-field>
+                    </p>
+
+                    <p style="margin: -0.25em 0em !important;">
+                        <mat-form-field floatLabel="never">
+                            <input matInput type="password" name="password" value="" placeholder="********" formControlName="password" [errorStateMatcher]="matcher" />
+                            <mat-error *ngIf="passwordFormControl?.hasError('required') && passwordFormControl?.touched">
+                                Password is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </p>
+                    <p class="inline-form-error" style="padding: 0;">{{ getErrorMessage() }}</p>
+                    <p class="inline-form-error" [ngClass]="{'green': reverified }" style="padding: 0;" *ngIf="showVerifyErrorMessage">{{ verificationErrorMessage }}
+                        <span *ngIf="showResendText" class="link" (click)="reverify()"> Resend Email</span>
+                    </p>
+                    <div class="inline-form-content">
+                        <div class="inline-form-submit">
+                            <p>
+                                <input *ngIf="!loader" type="submit" value="Login" name="inlineform" />
+                                <input *ngIf="loader" value="Logging In..." name="loggingIn" />
+                            </p>
+                        </div>
+                        <div class="inline-form-disclaimer">
+                            <p>
+                                <mat-checkbox style="margin-right: 1rem;"></mat-checkbox><label>Remember Me</label></p>
+                            <p>Forgot password? Click <span class="link" (click)="resetPasswordForm()">here</span> to reset. New User sign-up <span class="link" (click)="signUpForm()">here</span></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="banner">
+                <!-- <h1 class="banner_side">GAP</h1> -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Reset Form -->
+
+    <div class="inline-form-centered" *ngIf="resetPw">
+        <div class="inline-form-container-login">
+            <div class="login">
+                <h4>Reset Password</h4>
+                <form method="post" autocomplete="on" action="/clients/tred-web-v0.1/index.php?page=reset-password#contact-us" [formGroup]="resetFormGroup" (ngSubmit)="resetPassword($event)">
+                    <p>
+                        <mat-form-field floatLabel="never">
+                            <input matInput type="email" name="userEmail" placeholder="Enter Email" formControlName="userEmail" [errorStateMatcher]="matcher" />
+                            <mat-error *ngIf="userEmailFormControl?.hasError('required')">
+                                Email is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="userEmailFormControl?.hasError('pattern')">
+                                Please enter a <strong>valid</strong> email address
+                            </mat-error>
+                        </mat-form-field>
+                    </p>
+                    <p class="inline-form-success" *ngIf="resetSuccess" style="padding: 0; margin-top: -0.8rem; color: #f3f3f3">{{ resetSuccessMessage }} <span class="link" (click)="resendEmail()"> Resend Email</span></p>
+                    <!-- <p style="color: #f3f3f3; padding: 0;" class="inline-form-error" *ngIf="showSignUpSuccessMessage">{{ signUpSuccessMessage }}<span class="link" (click)="resendEmail()" *ngIf="verMsgShown"> Resend Email</span> -->
+                    <!-- </p> -->
+                    <p class="inline-form-error" *ngIf="resetError" style="padding: 0; margin-top: -0.8rem;">{{ resetErrorMessage }}</p>
+                    <div class="inline-form-content">
+                        <div class="inline-form-submit">
+                            <p><input type="submit" value="Reset Password" name="inlineform" /></p>
+                        </div>
+                        <div class="inline-form-disclaimer">
+                            <p>Don't have an account? <br>Click here to <span class="link" (click)="signUpForm()">sign-up</span></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="banner"></div>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+
+</div>

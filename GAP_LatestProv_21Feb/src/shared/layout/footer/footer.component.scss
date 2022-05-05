@@ -1,0 +1,47 @@
+// @import 'src/dark-theme.scss';
+.copytext {
+    border-top: 1px solid var(--borderbottomcolor);
+    width: 86vw;
+    height: auto;
+    padding: 1vw 0 3vw 0;
+    margin: 0 7vw 0 7vw;
+    font-size: 0.8em;
+    color: #999999;
+}
+
+.boilerplate {
+    border-top: 1px solid #4E4E4E;
+    width: 86vw;
+    height: auto;
+    padding: 1vw 0 3vw 0;
+    margin: 0 7vw 0 7vw;
+}
+
+.boilerplate ul {
+    padding: 0;
+    margin: 0;
+    font-size: 0.6em;
+    list-style: none;
+    display: inline-block;
+    width: 20vw;
+    margin-right: 1vw;
+    vertical-align: top;
+}
+
+.boilerplate ul li {
+    padding: 0;
+    margin: 0;
+    padding: 0.2em 0;
+    min-height: 1.6em;
+}
+
+.boilerplate ul li a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.boilerplate ul li.highlight,
+.boilerplate ul li.highlight a {
+    color: white;
+    font-weight: bold;
+}

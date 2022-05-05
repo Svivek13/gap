@@ -1,0 +1,187 @@
+.model {
+    color: #F27B50;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.upload {
+    margin-bottom: 1.5rem !important;
+}
+
+p.inputs {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    display: block;
+    padding: .8em 0 .4em 0;
+}
+
+
+/* Dropdown necessary css below */
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field {
+    display: block !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    margin-top: 0.8rem;
+    margin-left: 1rem;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+}
+
+::ng-deep .mat-form-field-infix {
+    border-top: 0 solid transparent;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    position: initial !important;
+    margin-top: 0.4rem !important;
+    margin-left: 0rem !important;
+    color: black !important;
+}
+
+
+/* Dropdown necessary css above */
+
+.flexDiv {
+    display: flex;
+}
+
+.fileContainer .input-group {
+    width: 100%;
+    padding-bottom: .8em;
+    position: relative;
+}
+
+input[type="file"] {
+    display: inline-block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: .8em 1vw;
+    background-color: #fff;
+    color: #4b4846;
+    border: none;
+    font-size: 1em;
+    position: initial;
+    width: 25.8vw;
+    overflow: visible;
+    cursor: pointer;
+}
+
+input:disabled {
+    cursor: not-allowed !important;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    width: 0px;
+    padding: 0;
+    border: none;
+}
+
+input[type="file"]::file-selector-button {
+    width: 0px;
+    padding: 0;
+    border: none;
+}
+
+input[type="file"]::placeholder {
+    color: #e3e3e3;
+}
+
+input[type="file"]:after {
+    content: "Browse";
+    text-decoration: none;
+    padding: .8em 1vw;
+    border-radius: 0.35em;
+    color: #807b77;
+    -webkit-appearance: none;
+    border: none;
+    font-weight: bold;
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    left: 28.5vw;
+    top: 1.8em;
+    width: 7.7vw;
+    text-align: center;
+}
+
+input[type="file"]:hover::after {
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 45%;
+}
+
+button {
+    text-decoration: none;
+    padding: 1em 1.4em;
+    border-radius: 0.35em;
+    color: #807b77;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: .5em;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #f7f7f7;
+}
+
+button.primary {
+    background-color: #F27B50;
+    color: #fff;
+    font-weight: bold;
+    border: 1px solid #F27B50;
+}
+
+button.secondary {
+    background-color: transparent;
+    border: 1px solid #F27B50;
+    color: #F27B50;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+}
+
+.dark-theme {
+    background-color: #242829 !important;
+    color: #f3f3f3 !important;
+}
+
+.save-button {
+    position: fixed;
+    bottom: 120px;
+}

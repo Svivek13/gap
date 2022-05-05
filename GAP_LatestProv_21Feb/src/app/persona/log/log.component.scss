@@ -1,0 +1,209 @@
+.label {
+    color: var(--fontcolor2);
+}
+
+.views {
+    width: auto;
+    min-width: 85vw;
+    max-width: 85vw;
+    position: relative;
+}
+
+.widget-holder {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    padding-bottom: 1em;
+    margin: 0 1em 1em;
+    padding-top: 1em;
+}
+
+.widget-holder .description {
+    margin-left: 23vw;
+}
+
+.widget-holder .description p {
+    max-width: 40vw;
+}
+
+.widget-holder-row {
+    display: flex;
+    padding-bottom: 1em;
+}
+
+.widget.opaque {
+    background-color: var(--cardcolor);
+    width: calc(100% - 3em);
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.05);
+}
+
+.widget.rounded {
+    border-radius: .5em;
+}
+
+.widget.overview {
+    max-width: 20vw;
+    min-width: 20vw;
+    max-height: 17vw;
+    padding: 1em;
+}
+
+.widget.numbercard {
+    max-width: 60vw !important;
+    min-width: 58vw !important;
+    min-height: 12.5vw !important;
+}
+
+.widget.overview .wrapperDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+.widget.overview .wrapperDiv .overview-row {
+    min-height: 2vw;
+}
+
+.widget.overview .wrapperDiv .overview-row:nth-child(2) {
+    flex-grow: 1;
+    min-height: 8vw;
+    display: flex;
+    align-items: center;
+}
+
+.widget.overview .wrapperDiv .value {
+    font-size: 3.6em;
+    color: #F27B50;
+}
+
+.widget.chart {
+    max-width: 60vw;
+    min-width: 60vw;
+    min-height: 16vw;
+    padding: 0.5em 1em 1em 1em;
+}
+.widget.half-chart {
+    max-width: 38vw;
+    min-width: 38vw;
+    min-height: 18vw;
+    height: 18vw;
+    padding: 0.5em 1em 1em 1em;
+}
+.widget.full-chart {
+    max-width: 80vw;
+    min-width: 80vw;
+    min-height: 32vw;
+    padding: 0.5em 1em 1em 1em;
+}
+
+.widget.chart .wrapperDiv .chart-row {
+    min-height: 2vw;
+    position: relative;
+}
+
+.widget.chart .wrapperDiv .chart-row.alert:after {
+    content: '';
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    width: 2.2em;
+    height: 2.2em;
+    position: absolute;
+    right: 0;
+    top: .3em;
+    bottom: auto;
+    transition: all .2s;
+    opacity: 1;
+}
+
+.widget img {
+    width: 100%;
+    height: auto;
+}
+
+.spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 45%;
+}
+
+.chartSettings {
+    margin-left: auto;
+    height: 40px;
+    margin-top: -0.3rem;
+}
+
+.dropdownSpan {
+    margin-right: 0.5rem;
+    border: 1px solid #72a4a0;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+.axisLabel {
+    margin-left: auto;
+    align-self: center;
+    color: #72a4a0;
+}
+
+.chartDropdown {
+    background: transparent;
+    width: 100px;
+    margin-left: 0.5rem;
+    height: 35px;
+}
+
+input {
+    display: block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 1em;
+}
+
+:host ::ng-deep .mat-select-value {
+    color: #72a4a0;
+    font-weight: bold;
+}
+
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+:host ::ng-deep .mat-select-arrow {
+    color: #72a4a0;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper,
+:host ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.applyButton {
+    color: #72a4a0;
+    border: 1px solid #72a4a0;
+    height: 62%;
+    align-self: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1vw;
+    background: transparent;
+    cursor: pointer;
+    width: 80px;
+    border-radius: 4px;
+}
+
+.applyButton:hover {
+    background: #72a4a0;
+    color: white;
+}
+.blur {
+    filter:url(#blurLayer);
+  }
+
+  .wrapper {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--cardcolor);
+    color: var(--fontcolor2);
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.4vw;
+}

@@ -1,0 +1,35 @@
+<div class="views">
+    <div class="formholder">
+        <div class="formholder-container">
+            <div class="formholder-inputs">
+                <form [formGroup]="inviteFormGroup" (ngSubmit)="sendInvite($event)">
+                    <div class="input-sections">
+                        <h4>Invite</h4>
+                        <div class="input-group">
+                            <label>Please provide the email of your friend/colleague you wish to invite to use ML Works</label>
+                            <mat-form-field floatLabel="never">
+                                <input matInput type="email" name="email" value="" placeholder="example@example.com" formControlName="inviteEmail" required [errorStateMatcher]="matcher" />
+                                <mat-error style="margin-top: 0.5rem;" *ngIf="inviteEmailFormControl?.hasError('required')">
+                                    Email is <strong>required</strong>
+                                </mat-error>
+                                <mat-error style="margin-top: 0.5rem;" *ngIf="inviteEmailFormControl?.hasError('pattern')">
+                                    Please enter a <strong>valid</strong> email address
+                                </mat-error>
+                            </mat-form-field>
+
+                            <p class="inline-form-success" *ngIf="sentSuccess">{{ sentSuccessMsg }}</p>
+                            <p class="inline-form-error" *ngIf="sentError">{{ sentErrMsg }}</p>
+
+                        </div>
+                    </div>
+
+                    <div class="input-sections">
+                        <div class="input-group">
+                            <button class="primary" type="submit">{{inviteText}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

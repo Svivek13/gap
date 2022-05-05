@@ -1,0 +1,13 @@
+<mat-form-field class="dropdown" *ngIf="!multi" [floatLabel]="'never'">
+    <mat-select [(ngModel)]="dropdownLabel" [name]="dropdownName" [placeholder]="placeholder">
+        <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field class="dropdown" *ngIf="multi" [floatLabel]="'never'">
+    <mat-select multiple [placeholder]="multiPlaceholder">
+        <mat-option *ngFor="let options of multiOptions" [value]="options">{{options}}</mat-option>
+    </mat-select>
+</mat-form-field>

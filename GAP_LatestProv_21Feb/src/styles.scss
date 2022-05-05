@@ -1,0 +1,541 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+@font-face {
+    font-family: "Montserrat";
+    src: url(/assets/Montserrat/Montserrat-Light.ttf) format("truetype");
+    font-weight: 300;
+}
+
+
+/* theme exp starts */
+
+//scss
+// @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+// html{}
+:root {
+    --bgcolor: #d9dfe1;
+    --cardcolor: #fff;
+    --calendarCard: white;
+    --fontcolor: #4b4846;
+    --fontcolor2: #6b6b6b;
+    --fontcolor3: #807b77;
+    --input-bg: #fff;
+    --buttonhover: #f27b50;
+    --tablerowhover: #f5f7f8;
+    --bordercolor: #33c5df;
+    --borderbottomcolor: #B2BEC0;
+    --borderbottomcolor2: #A8B8BF;
+    --borderbottomcolor3: #d9dfe0;
+    --borderrightcolor: #f0f2f2;
+    --input-radius: 0.35em;
+    --shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+    --widgetbg: #fff;
+    --widgetfontcolor: #4b4846;
+    --iconfilter: grayscale(100%) brightness(10%);
+    --disabledbtnfilter: grayscale(100%) brightness(200%);
+    --playiconfilter: ;
+    --iconfilterhover: saturate(100%);
+    --iconpath: "../assets/img/icons/";
+    //chart values
+    --charttext: #999;
+    --chartgrid: lighten($bordercolor, 5%);
+    --chartgridhigh: darken($bordercolor, 15%);
+    --chartticks: #999;
+    --chartselected: #333;
+    --blackwhite: black;
+    --tablefontcolor: #4B4846;
+    --calColor1: rgba(0, 0, 0, 0.87);
+    --calColor2: rgba(0, 0, 0, 0.54);
+    --calColor3: rgba(0, 0, 0, 0.38);
+    --calColor4: rgba(0, 0, 0, 0.12);
+    --whiteblack: white;
+    --tabheader: #aebbbf;
+    --buttoncolor: white;
+    --btndisabledbgcolor: rgba(0, 0, 0, 0.12);
+    --btndisabledfontcolor: rgba(0, 0, 0, 0.26);
+}
+
+// @import 'light-theme.scss';
+// @mixin theme-colors($light-theme: true) {
+//   @if $light-theme {
+//     @import 'light-theme.scss';
+//   } @else {
+//     @import 'dark-theme.scss';
+//   }
+// }
+// .light-mode {
+//   @include theme-colors($light-theme: true);
+// }
+.dark-mode {
+    --bgcolor: #242829;
+    --cardcolor: #303537;
+    --calendarCard: #4b5457;
+    --fontcolor: #f3f3f3;
+    --fontcolor2: #f3f3f3;
+    --fontcolor3: #f3f3f3;
+    --input-bg: #fff;
+    --buttonhover: #f27b50;
+    --tablerowhover: #485052;
+    // $bordercolor: lighten(var(--bgcolor), 10%);
+    --borderbottomcolor: #3c4244;
+    --borderbottomcolor2: #3c4244;
+    --borderbottomcolor3: #3c4244;
+    --borderrightcolor: #3c4244;
+    --input-radius: 0.35em;
+    --shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+    // $widgetbg: lighten(--bgcolor, 5%);
+    --widgetfontcolor: $fontcolor;
+    --iconfilter: grayscale(100%) brightness(200%);
+    --disabledbtnfilter: grayscale(100%) brightness(50%);
+    --playiconfilter: grayscale(100%) brightness(300%);
+    --iconfilterhover: saturate(100%);
+    --iconpath: "images/icon/dark/";
+    //chart values
+    --charttext: #999;
+    // $chartgrid: darken($bordercolor, 5%);
+    // $chartgridhigh: lighten($bordercolor, 15%);
+    --chartticks: #999;
+    --chartselected: #ccc;
+    --blackwhite: white;
+    --tablefontcolor: #f3f3f3;
+    background-color: var(--bgcolor) !important;
+    color: var(--fontcolor) !important;
+    // @import "stylebase";
+    // @import "linechart";
+    --calColor1: rgba(255, 255, 255, 0.87);
+    --calColor2: rgba(255, 255, 255, 0.54);
+    --calColor3: rgba(255, 255, 255, 0.38);
+    --calColor4: rgba(255, 255, 255, 0.12);
+    --whiteblack: black;
+    --tabheader: #474e50;
+    --buttoncolor: #242829;
+    --btndisabledbgcolor: #494f50;
+    --btndisabledfontcolor: #a99898;
+}
+
+
+/* theme exp ends */
+
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    // caret-color: transparent;
+    overflow: overlay;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-moz-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-ms-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-moz-scrollbar-track {
+    background: transparent;
+}
+
+::-ms-scrollbar-track {
+    background: transparent;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+::-moz-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+::-ms-scrollbar-thumb {
+    background: #555;
+    border-radius: 6px;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(65, 64, 64);
+}
+
+::-moz-scrollbar-thumb:hover {
+    background: rgb(65, 64, 64);
+}
+
+::-ms-scrollbar-thumb:hover {
+    background: rgb(65, 64, 64);
+}
+
+.disable-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #2d2d2d;
+    opacity: 0.6;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+}
+
+.disable-background-custom {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2d2d2d;
+    opacity: 0.6;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+}
+
+.wrapper {
+    font-family: "Montserrat", sans-serif;
+    background-color: #252830;
+    color: #fff;
+    padding: 0px;
+    margin: 0px;
+    font-size: 1.4vw;
+}
+
+
+/* common css */
+
+.link {
+    text-decoration: underline;
+    color: #F27B50;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.formholder {
+    padding: 0 1vw;
+}
+
+.formholder h4 {
+    font-size: 1em;
+}
+
+.formholder-container {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    display: flex;
+    flex-direction: row;
+    padding: 1.5em 0;
+}
+
+.formholder-inputs {
+    width: 44vw;
+}
+
+.formholder-inputs .input-group {
+    width: 100%;
+    padding-bottom: 0.8em;
+    position: relative;
+}
+
+.formholder-inputs .input-group:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-inputs .input-sections {
+    padding-bottom: 1em;
+}
+
+.formholder-inputs .input-sections:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-helps {
+    width: 50vw;
+    padding: 0 2vw;
+    border-left: 1px solid var(--borderbottomcolor);
+}
+
+.formholder.formend .formholder-container {
+    border: none;
+}
+
+.dropdown {
+    display: block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    padding: 0.2em 1em;
+    background-color: #fff; // consider dark theming here
+    border: none;
+    font-size: 1em;
+    width: calc(100% - 1em);
+    box-sizing: border-box;
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 0.5em) center;
+    font-family: "Montserrat", sans-serif;
+}
+
+// input,
+// textarea {
+//     display: block;
+//     border-radius: 0.35em;
+//     -webkit-appearance: none;
+//     padding: .8em 1em;
+//     background-color: #fff;
+//     border: none;
+//     font-size: 1em;
+//     width: calc(100% - 3em);
+//     font-family: 'Montserrat', sans-serif;
+// }
+// input::placeholder,
+// textarea::placeholder {
+//     color: #e3e3e3;
+// }
+.disable-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #2d2d2d;
+    opacity: 0.6;
+    z-index: 998;
+    height: 100%;
+    width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+h4 {
+    cursor: context-menu;
+}
+
+.module_body {
+    font-family: "Montserrat", sans-serif;
+    background-color: var(--bgcolor) !important;
+    color: var(--fontcolor) !important;
+    padding: 0px;
+    margin: 0px;
+    font-size: 1vw;
+}
+
+p,
+h1,
+h2,
+h4,
+h4,
+h5,
+h6 {
+    padding: 0px;
+    margin: 0.5em 0em;
+}
+
+p,
+h4,
+h5,
+h6 {
+    line-height: 1.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 0.8em;
+}
+
+input {
+    color: black;
+}
+
+input,
+button {
+    outline: none;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.custom-dialog-class .mat-dialog-container {
+    background-color: var(--bgcolor) !important;
+    color: var(--fontcolor) !important;
+    font-size: 1vw;
+}
+
+.dark-dialog-class .mat-dialog-container {
+    background-color: #242829 !important;
+    color: #f3f3f3 !important;
+    font-size: 1vw;
+}
+
+// setup mapping popup styles starts
+.dark-dialog-class .popup-white-canvas-container {
+    background-color: #242829 !important;
+    color: #f3f3f3 !important;
+}
+
+.dark-dialog-class .mat-tab-header {
+    background-color: #474e50 !important;
+    color: #f3f3f3 !important;
+}
+
+.dark-dialog-class .mat-tab-label {
+    color: #f3f3f3 !important;
+}
+
+.dark-dialog-class .mat-checkbox-label {
+    color: #f3f3f3 !important;
+}
+
+.dark-dialog-class .mat-tab-label.mat-tab-label-active {
+    background-color: #242829 !important;
+    color: #f3f3f3;
+}
+
+.dark-dialog-class .popup-white-tabs li.selected {
+    background-color: #242829 !important;
+    color: #f3f3f3;
+}
+
+.dark-dialog-class .mat-tab-label:hover {
+    background-color: #677275;
+}
+
+.dark-dialog-class .table .row .cell {
+    border-bottom: 1px solid #3c4244;
+    border-right: 1px solid #3c4244;
+}
+
+.dark-dialog-class {
+    .table .row .cell {
+        border-bottom: 1px solid #3c4244;
+        border-right: 1px solid #3c4244;
+    }
+}
+
+// setup mapping popup styles ends
+// for provenance graph starts
+.dark-dialog-class .mat-divider {
+    border-top-color: #3c4244;
+}
+
+// for provenance graph ends
+
+// material styles at one place: starts
+.mat-tree-node,
+.mat-nested-tree-node {
+    color: var(--fontcolor) !important;
+}
+
+.mat-table {
+    background: var(--cardcolor) !important;
+}
+
+.mat-cell,
+.mat-footer-cell {
+    color: var(--tablefontcolor) !important;
+}
+
+.mat-paginator {
+    background: var(--cardcolor) !important;
+    color: var(--fontcolor) !important;
+}
+
+.mat-paginator-icon {
+    color: var(--fontcolor) !important;
+}
+
+.dark-mode {
+    .mat-datepicker-content {
+        background-color: var(--calendarCard) !important;
+        color: var(--calColor1) !important;
+    }
+    .mat-calendar-body-cell-content {
+        color: var(--calColor1) !important;
+    }
+    .mat-calendar-body-label {
+        color: var(--calColor2) !important;
+    }
+    .mat-calendar-table-header {
+        color: var(--calColor3) !important;
+    }
+    .mat-datepicker-toggle, .mat-datepicker-content .mat-calendar-next-button, .mat-datepicker-content .mat-calendar-previous-button {
+        color: var(--calColor2) !important;
+    }
+    .mat-calendar-table-header-divider::after {
+        background: var(--calColor4) !important;
+    }
+    .mat-calendar-arrow {
+        border-top-color: var(--calColor2) !important;
+    }
+    .mat-calendar-body-today:not(.mat-calendar-body-selected) {
+        border-color: var(--calColor3) !important;
+    }
+}
+
+// material styles at one place: ends
+
+// common css for themeing
+.description-chart {
+    align-self: center;
+    padding-bottom: 1em;
+}
+
+//
+.views .blocker {
+    width: 99%;
+    height: 98%;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    -webkit-backdrop-filter: saturate(100%) blur(5px);
+    backdrop-filter: saturate(100%) blur(5px);
+    z-index: 999;
+    border-radius: 0.5em;
+    margin: auto;
+}
+
+.views .blocker-text {
+    width: 40vw;
+    height: auto;
+    margin: 20vh auto;
+    background-color: #303537;
+    color: #f3f3f3;
+    padding: 1vw;
+    border-radius: 0.5em;
+    box-shadow: 0 12px 48px 0 rgb(0 0 0 / 18%);
+}
+
+.joyride-step__container {
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+}
+.flex {
+    display: flex;
+}
+// .cdk-overlay-pane{
+//     width: 141px !important;
+// }

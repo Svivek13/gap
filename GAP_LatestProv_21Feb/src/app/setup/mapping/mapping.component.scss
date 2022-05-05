@@ -1,0 +1,522 @@
+.popup-content {
+    height: 40vh;
+    overflow: auto;
+}
+
+.popup-content-topten {
+    height: 55vh;
+    overflow: auto;
+}
+
+.popup-canvas {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-canvas-container {
+    border-radius: 0.7em;
+    background-color: #D9DFE1;
+    width: 50vw;
+    min-height: 40vh;
+    max-height: 90vh;
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 998;
+}
+
+::ng-deep .mat-dialog-container {
+    background: transparent;
+}
+
+.popup-tabs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    /* background-color: #aebbbf; */
+    /* border-top: 0.5em solid #aebbbf; */
+}
+
+::ng-deep .mat-tab-header {
+    background-color: #aebbbf;
+    border-top: 0.5em solid var(--tabheader);
+    border-radius: 0.7em 0.7em 0 0;
+    position: fixed !important;
+    max-width: 80vw;
+    min-width: 52vw;
+    height: 5vw;
+    z-index: 999;
+    border-bottom: none !important;
+    box-shadow: 0 -6px 12px 0 rgb(0 0 0 / 30%);
+}
+
+::ng-deep .mat-tab-body-content {
+    margin-top: -0.3rem;
+}
+
+:host ::ng-deep .mat-tab-body {
+    margin-top: 4rem;
+}
+
+::ng-deep .mat-tab-group[mat-stretch-tabs]>.mat-tab-header .mat-tab-label {
+    font-size: 1em;
+    padding: 2.5em 0;
+    font-weight: bold;
+    color: black;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+    background-color: #fff;
+    box-shadow: 0 -6px 12px 0 rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    border-radius: 0.7em 0.7em 0 0;
+}
+
+::ng-deep .mat-tab-label {
+    opacity: 1 !important;
+}
+
+::ng-deep .mat-tab-label:hover {
+    background-color: #a0afb4;
+}
+
+::ng-deep .mat-ink-bar {
+    display: none;
+}
+
+::ng-deep .mat-tab-body.mat-tab-body-active {
+    overflow-y: hidden !important;
+}
+
+.popup-header {
+    padding: .6em 1em;
+    font-size: 1.4em;
+}
+
+.table,
+ ::ng-deep .mat-tab-body-content {
+    border-width: 1px 0px 0px 0px;
+    border-style: solid;
+    border-color: #B2BEC0;
+    padding: 0.7em 0em 1em 0em;
+    width: inherit;
+}
+
+.table p {
+    font-size: 0.8em;
+    padding: .3em 0;
+}
+
+.table .row {
+    display: flex;
+    padding: .2em 0;
+}
+
+.table .row.header {
+    font-weight: bold;
+}
+
+.table .row .cell {
+    flex-grow: 1;
+    max-width: 47%;
+    min-width: 20%;
+    border-bottom: 1px solid #d9dfe0;
+    border-right: 1px solid #d9dfe0;
+    word-break: break-word;
+}
+
+.table .row .cell p {
+    padding: .5em .5em;
+}
+
+.table .row .cell.input,
+.table .row .cell.count {
+    min-width: 6%;
+    max-width: 6%;
+    word-break: normal;
+    text-align: right;
+}
+
+.table .row .cell.header {
+    font-weight: bold;
+}
+
+.table .row .cell.elipsis p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.targetTable .row:last-child .cell {
+    border: none;
+}
+
+.inputClass {
+    display: block;
+    border-radius: 0.35em;
+    -webkit-appearance: none;
+    padding: .8em 1em;
+    background-color: #fff;
+    border: none;
+    font-size: 1em;
+    width: calc(100% - 3em);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.inputClass::placeholder {
+    color: #e3e3e3;
+}
+
+p.inputs {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+button {
+    text-decoration: none;
+    padding: 1em 1.4em;
+    border-radius: 0.35em;
+    color: #807b77;
+    -webkit-appearance: none;
+    border: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    margin-right: .5em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+button.primary {
+    background-color: #F27B50;
+    color: #fff;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #f06938;
+    color: #fff;
+    font-weight: bold;
+}
+
+input:focus {
+    outline: none;
+}
+
+.classname ::ng-deep .mat-form-field-label {
+    margin-top: 0.9rem !important;
+    margin-left: 1rem !important;
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field {
+    display: block !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    margin-top: 0.8rem;
+    margin-left: 1rem;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0.25em;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+    border-top: 0 solid transparent;
+}
+
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: white !important;
+}
+
+:host ::ng-deep .mat-form-field-label {
+    position: initial !important;
+    margin-top: 0.4rem !important;
+    margin-left: 0rem !important;
+    color: black !important;
+}
+
+// NEWW
+.popup-white {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.popup-white-close {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.popup-white-canvas {
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.popup-white-canvas-container {
+    border-radius: 0.7em;
+    // background-color: #D9DFE1;
+    width: 50vw;
+    min-height: 40vh;
+    max-height: 90vh;
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+    overflow-x: hidden;
+    overflow-y: hidden; // scroll earlier, changed for sticky footer
+    z-index: 998;
+    background-color: #fff;
+}
+
+.popup-white-canvas-container.wide {
+    max-width: 80vw;
+    min-width: 52vw;
+}
+
+.container-width {
+    min-width: 80vw;
+}
+
+.popup-white-canvas-container .table_container_scroll {
+    width: inherit;
+    overflow-x: scroll;
+    height: 70vh;
+}
+
+.popup-white-canvas-container .data_table {
+    width: auto;
+    min-width: 100%;
+}
+
+.popup-white-canvas-container .data_table p {
+    max-width: 12vw;
+}
+
+.popup-white-canvas-container .data_table p.truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popup-white-canvas-footer {
+    margin: 0.5em 1em;
+}
+
+.popup-white-canvas-help {
+    padding: .5em 1em;
+    color: #807b77;
+}
+
+.popup-white-tabs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    background-color: #aebbbf;
+    border-top: 0.5em solid #aebbbf;
+}
+
+.popup-white-tabs li {
+    padding: .6em 1em;
+    flex: 1;
+    background-color: #aebbbf;
+    border-radius: 0.7em 0.7em 0 0;
+    overflow: hidden;
+}
+
+.popup-white-tabs li p {
+    font-size: 1em;
+    padding: .3em 0;
+    font-weight: bold;
+}
+
+.popup-white-tabs li.selected {
+    background-color: #fff;
+    box-shadow: 0 -6px 12px 0 rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.popup-white-header {
+    padding: .6em 1em;
+    font-size: 1.4em;
+}
+
+.target-dropdown {
+    background-color: #f3f3f3;
+}
+
+table {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.popup-white-canvas-container .table_container_scroll {
+    width: inherit;
+    overflow-x: scroll;
+}
+
+.popup-white-canvas-container .data_table {
+    width: auto;
+    min-width: 100%;
+}
+
+.popup-white-canvas-container .data_table p {
+    max-width: 12vw;
+}
+
+.popup-white-canvas-container .data_table p.truncated {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table.data_table {
+    width: 97%;
+    margin: auto;
+    border-collapse: collapse;
+}
+
+table.data_table tr td {
+    border-right: 1px solid var(--borderrightcolor);
+    border-bottom: 1px solid var(--borderbottomcolor3);
+    max-width: 25vw;
+    vertical-align: top;
+}
+
+table.data_table tr td button {
+    padding: .6em 1em;
+}
+
+table.data_table tr td:last-child {
+    border-right: none;
+}
+
+table.data_table tr td p {
+    padding: .5em .5em;
+}
+
+table.data_table tr td p.status {
+    text-align: center;
+}
+
+table.data_table tr td p.status:before {
+    content: '';
+    width: .75em;
+    height: .75em;
+    border-radius: 100%;
+    background-color: #ccc;
+    display: inline-block;
+    margin-right: .5em;
+    box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+table.data_table tr td p.status.green:before {
+    background-color: #A2C55D;
+}
+
+table.data_table tr td p.status.red:before {
+    background-color: #FF5555;
+}
+
+table.data_table tr td p.status.orange:before {
+    background-color: #FF993A;
+}
+
+table.data_table tr td p.number,
+table.data_table tr td p.date,
+table.data_table tr td p.button {
+    text-align: right;
+}
+
+table.data_table tr td p.icon {
+    text-align: center;
+    background-size: auto 2.2em;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+table.data_table tr td p.sort {
+    background-size: auto 1.5em;
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 1.8em;
+}
+
+table.data_table tr th.mat-header-cell p.sort:hover {
+    color: #F27B50;
+    cursor: pointer;
+}
+
+table.data_table tr:last-child td {
+    border-bottom: none;
+}
+
+table.data_table th.mat-header-cell {
+    font-weight: bold;
+    font-size: 1em;
+    color: var(--blackwhite);
+    padding: .5em .5em;
+    border-bottom: 1px solid var(--borderbottomcolor);
+    border-right: 1px solid var(--tablerowhover);
+    min-width: 55px;
+}
+
+table.data_table tr.mat-row:hover {
+    background-color: var(--tablerowhover);
+}
+
+:host ::ng-deep td.mat-cell:first-of-type {
+    padding-left: 0;
+}
+
+:host ::ng-deep td.mat-cell:last-of-type {
+    padding-right: 0;
+}
+
+tr.mat-header-row {
+    height: 40px !important;
+}
+
+.mat-column-name {
+    font-weight: bold;
+}
+
+.popup-tab {
+    position: relative;
+}

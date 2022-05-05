@@ -1,0 +1,49 @@
+.upload {
+    padding: .5em 0 .5em 0;
+    display: flex;
+}
+
+.upload-progress {
+    width: 32vw;
+    border-radius: 3.5em;
+    background-color: #fff;
+    height: 0.4em;
+    margin: 0.3em 0;
+}
+
+.upload-progress-elapsed {
+    background-color: #F27B50;
+    border-radius: 3.5em;
+    height: 0.4em;
+    background-size: 30px 300px;
+    background-image: repeating-linear-gradient(45deg, #F27B50, #F27B50 10px, #fbd5c7 10px, #fbd5c7 20px);
+    animation-name: move-stripes;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move-stripes {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: 30px;
+    }
+}
+
+.upload-text {
+    font-size: 0.8em;
+    margin: 0 1vw;
+    font-weight: bold;
+    color: #807b77;
+}
+
+.view-icon {
+    vertical-align: middle;
+    margin-right: 1vw;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-decoration: underline;
+}

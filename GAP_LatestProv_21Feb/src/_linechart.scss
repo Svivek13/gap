@@ -1,0 +1,85 @@
+
+
+.line-chart-1 {
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: auto;
+    
+    .data-line {
+      stroke: #F27B50;
+      stroke-width: 2px;
+    }
+    
+    .data-label {
+      fill: #F27B50;
+      font-size: 10px;
+    }
+    
+    .data-dots {
+      stroke: #F27B50;
+      stroke-width: 2px;
+      fill: #fff;
+    }
+    
+    text.x-axis, text.y-axis {
+      font-family: inherit;
+      font-size: 8px;
+      fill: $charttext;
+    }
+    
+    text.x-axis-selected {
+      font-family: inherit;
+      font-size: 8px;
+      fill: $chartselected;
+    }
+    
+    line.x-axis-selected {
+      stroke: $chartticks;
+    }
+    
+    line.x-axis-ticks {
+      stroke: $chartticks; //$chartgrid;
+      stroke-width: 1;
+    }
+    
+    line.x-axis-grid {
+      stroke: $chartgrid; //$chartgrid;
+      stroke-width: 1;
+    }
+    
+    line.x-axis-line {
+      stroke: $chartticks; //$chartgrid;
+      stroke-width: 1;
+    }
+    
+    line.y-axis-grid {
+      stroke: $chartgridhigh;
+      stroke-width: 0.9;
+    }
+    
+    line.y-axis-benchmark {
+      stroke: #5B9792;
+      stroke-width: 0.9;
+      stroke-dasharray: 4,4;
+    }
+    
+    text.y-axis-benchmark {
+      fill: #5B9792;
+      font-size: 10px;
+    }
+    
+    line.y-axis-line {
+      stroke: $chartgrid;
+      stroke-width: 0.9;
+    }
+    
+    text.x-axis-label, text.y-axis-label {
+      font-family: inherit;
+      font-size: 8px;
+      fill: $chartselected;
+    }
+    
+    
+  }

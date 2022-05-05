@@ -1,0 +1,228 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<div class="views">
+    <div class="widget-holder" *ngIf="driftProbability">
+        <div *ngIf="model == 'Direct_Mail'">
+            <h3>Probability</h3>
+        </div>
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded smallchart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4>Drift by Features <span style="font-weight: 300;
+                          font-size: 0.8em;">(click on the graph for trend)</span></h4>
+                    </div>
+                    <div *ngIf="driftAvailable">
+                        <app-horizontal-bar-chart *ngIf="horBarChartReady" [drift]="true" chartName="drift"
+                            [datasets]="horBarChartData" [labels]="horBarChartLabels" [colors]="horBarChartColors"
+                            (chartClickEvent)="getFeatureTrend($event)"
+                            (chartYAxisLabelClickEvent)="getFeatureTrendForYAxisLabel($event)">
+                        </app-horizontal-bar-chart>
+                        <app-chart-paginator *ngIf="horBarChartReady" [totalLength]="featuresLength"
+                            personaType="completeness" (prevClickEvent)="showPrevFeatures($event)"
+                            (nextClickEvent)="showNextFeatures($event)">
+                        </app-chart-paginator>
+                    </div>
+                    <div *ngIf="!driftAvailable" class="featureError label">
+                        <p style="font-size: 14px;"><strong>{{ featureErrorMsg }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Clicking on this changes the next chart -->
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Feature - '{{ featureName }}'</h4>
+                        <p class="description-chart" *ngIf="chartReady">Summary of the change in distribution of the
+                            feature named '<strong>{{featureName}}</strong>' is recorded for the last 20 executions</p>
+                    </div>
+                    <app-line-chart *ngIf="chartReady" lineChartName="driftTrend" [lineChartData]="featureTrendData"
+                        [lineChartLabels]="featureTrendLabels"></app-line-chart>
+                </div>
+            </div>
+            <!-- Clicking on this opens the next chart -->
+        </div>
+
+        <div class="widget-holder-row">
+
+            <div class="widget overview ">
+                &nbsp;
+
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Testing Vs Training Comparison - '{{featureName}}'</h4>
+                        <p class="description-chart" *ngIf="densityChartReady">Visual comparison of the data
+                            distribution of the feature named '<strong>{{featureName}}</strong>' for the current
+                            execution</p>
+                    </div>
+
+                    <div class="widget loading" *ngIf="!densityChartReady">
+                        <div class="load">Loading</div>
+                    </div>
+                    <app-line-chart *ngIf="densityChartReady" lineChartName="densityTrend"
+                        [lineChartData]="densityTrendData" [xLabel]='featureName' yLabel='Feature Density (%)'>
+                    </app-line-chart>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="widget-holder-row" *ngIf="model == 'Direct_Mail'">
+            <div class="widget overview ">
+                &nbsp;
+
+            </div>
+            <div class="widget chart">
+                <form class="input-group" [formGroup]="modelSearchForm">
+                    <div>
+                        <label>Segment</label>
+                        <div style="display: flex;margin-right: 10px;">
+                            <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Segment"
+                                [formControl]="modelSearchForm.get('segment')" [matAutocomplete]="auto5" />
+                            <mat-autocomplete #auto5="matAutocomplete" [panelWidth]="180"
+                                (optionSelected)='selectSegmentWiseDensity()' [displayWith]="displayFnSegment">
+                                <mat-option *ngFor="let option of segmentList" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                                (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                        </div>
+                    </div>
+                </form>
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Segmentwise Testing Vs Training Comparison - '{{featureName}}'</h4>
+                        <p class="description-chart" *ngIf="densityChartReadySegment">Visual comparison of the data
+                            distribution of the feature named '<strong>{{featureName}}</strong>' for the current
+                            execution</p>
+                    </div>
+
+                    <div class="widget loading" *ngIf="!densityChartReadySegment">
+                        <div class="load">Loading</div>
+                    </div>
+                    <app-line-chart *ngIf="densityChartReadySegment" lineChartName="densityTrend"
+                        [lineChartData]="densityTrendDataSegment" [xLabel]='featureName' yLabel='Feature Density (%)'>
+                    </app-line-chart>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="widget-holder" *ngIf="driftRevenue">
+        <div>
+            <h3>Revenue</h3>
+        </div>
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded smallchart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Drift by Features <span style="font-weight: 300;
+                          font-size: 0.8em;">(click on the graph for trend)</span></h4>
+                    </div>
+                    <div *ngIf="driftAvailable2">
+                        <app-horizontal-bar-chart *ngIf="horBarChartReady1" [drift]="true" chartName="drift"
+                            [datasets]="horBarChartDataRev" [labels]="horBarChartLabelsRev" [colors]="horBarChartColors"
+                            (chartClickEvent)="getFeatureTrend($event)"
+                            (chartYAxisLabelClickEvent)="getFeatureTrendForYAxisLabel($event)">
+                        </app-horizontal-bar-chart>
+                        <app-chart-paginator *ngIf="horBarChartReady1" [totalLength]="featuresLengthRev"
+                            personaType="completeness" (prevClickEvent)="showPrevFeaturesRev($event)"
+                            (nextClickEvent)="showNextFeaturesRev($event)"></app-chart-paginator>
+                    </div>
+                    <div *ngIf="!driftAvailable2" class="featureError label">
+                        <p style="font-size: 14px;"><strong>{{ featureErrorMsg }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Clicking on this changes the next chart -->
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Feature - '{{ featureNameRev }}'</h4>
+                        <p class="description-chart" *ngIf="chartReady1">Summary of the change in distribution of the
+                            feature named '<strong>{{featureNameRev}}</strong>' is recorded for the last 20 executions
+                        </p>
+                    </div>
+                    <app-line-chart *ngIf="chartReady1" lineChartName="driftTrend" [lineChartData]="featureTrendDataRev"
+                        [lineChartLabels]="featureTrendLabelsRev"></app-line-chart>
+                </div>
+            </div>
+            <!-- Clicking on this opens the next chart -->
+        </div>
+
+        <div class="widget-holder-row">
+            <div class="widget overview ">
+                &nbsp;
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Testing Vs Training Comparison - '{{featureNameRev}}'</h4>
+                        <p class="description-chart" *ngIf="densityChartReady1">Visual comparison of the data
+                            distribution of the feature named '<strong>{{featureNameRev}}</strong>' for the current
+                            execution</p>
+                    </div>
+
+                    <div class="widget loading" *ngIf="!densityChartReady1">
+                        <div class="load">Loading</div>
+                    </div>
+                    <app-line-chart *ngIf="densityChartReady1" lineChartName="densityTrend"
+                        [lineChartData]="densityTrendDataRev" [xLabel]='featureNameRev' yLabel='Population Density (%)'>
+                    </app-line-chart>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="widget-holder-row"  *ngIf="model == 'Direct_Mail'">
+            <div class="widget overview ">
+                &nbsp;
+
+            </div>
+            <div class="widget chart">
+                <form class="input-group" [formGroup]="modelSearchForm">
+                    <div>
+                        <label>Segment</label>
+                        <div style="display: flex;margin-right: 10px;">
+                            <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Segment"
+                                [formControl]="modelSearchForm.get('segment')" [matAutocomplete]="auto5" />
+                            <mat-autocomplete #auto5="matAutocomplete" [panelWidth]="180"
+                                (optionSelected)='selectSegmentWiseDensity()' [displayWith]="displayFnSegment">
+                                <mat-option *ngFor="let option of segmentList" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option}}
+                                </mat-option>
+                            </mat-autocomplete>
+                            <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                                (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                        </div>
+                    </div>
+                </form>
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Segmentwise Testing Vs Training Comparison - '{{featureNameRev}}'</h4>
+                        <p class="description-chart" *ngIf="densityChartReady1Segment">Visual comparison of the data
+                            distribution of the feature named '<strong>{{featureNameRev}}</strong>' for the current
+                            execution</p>
+                    </div>
+
+                    <div class="widget loading" *ngIf="!densityChartReady1Segment">
+                        <div class="load">Loading</div>
+                    </div>
+                    <app-line-chart *ngIf="densityChartReady1Segment" lineChartName="densityTrend"
+                        [lineChartData]="densityTrendDataRevSegment" [xLabel]='featureNameRev'
+                        yLabel='Population Density (%)'>
+                    </app-line-chart>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

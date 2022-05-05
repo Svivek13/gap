@@ -1,0 +1,97 @@
+pdf-viewer {
+    display: block;
+    height: 67vh;
+}
+
+label {
+    text-transform: uppercase;
+    font-size: 0.75em;
+    display: block;
+    padding: .8em 0 .4em 0;
+}
+
+.views {
+    width: auto;
+    min-width: 85vw;
+    max-width: 85vw;
+}
+
+.views .formholder {
+    padding: 0 1vw;
+}
+
+.views .formholder-container {
+    border-bottom: none;
+}
+
+.formholder {
+    padding: 0 8vw;
+}
+
+.formholder h4 {
+    font-size: 1em;
+}
+
+.formholder-container {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    display: flex;
+    flex-direction: row;
+    padding: 1.5em 0;
+    position: relative;
+}
+
+.formholder-inputs {
+    width: 44%;
+}
+
+.formholder-inputs .input-group {
+    width: 100%;
+    padding-bottom: .8em;
+    position: relative;
+}
+
+.formholder-inputs .input-group:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-inputs .input-sections {
+    padding-bottom: 1em;
+}
+
+.formholder-inputs .input-sections:last-child {
+    padding-bottom: 0;
+}
+
+.formholder-helps {
+    width: 100%;
+    padding: 0 2vw;
+    border-left: 1px solid var(--borderbottomcolor);
+}
+
+.formholder.formend .formholder-container {
+    border: none;
+}
+
+.expansion-panel {
+    background: transparent;
+    box-shadow: none;
+    border-radius: unset;
+    border-bottom: 1px solid var(--borderbottomcolor);
+}
+.mat-expansion-panel-header {
+    font-size: 0.8em;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+}
+
+.mat-expansion-panel-header-title {
+    color: var(--fontcolor)
+}
+
+:host ::ng-deep .mat-expansion-panel-body {
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0 0px 16px;
+    color: var(--fontcolor)
+}

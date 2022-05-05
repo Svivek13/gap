@@ -1,0 +1,43 @@
+{
+    "envType": "dev",
+    "exemptedRoutes": ["/main.js", "/vendor.js", "/scripts.js", "/styles.js", "polyfills.js", "runtime.js"],
+      "dbConfigs": {
+    "protocol": "mongodb",
+    "host": "g-cdb-2p-gdl-mongiapicosmosdbaccount-01.mongo.cosmos.azure.com",
+    "port": 10255,
+    "dbName": "g-cdb-2p-gdl-db-01",
+
+    "username": "g-cdb-2p-gdl-mongiapicosmosdbaccount-01",
+    "password": "HrpOT4qwqCHwRHtUCAyXtIFxKqt4XB3LYD2aB89QEgMyHrX5vfMVSENoVrGgaaTRNgwJ6bLxChHnuyMRCB58Tw=="
+
+
+  },
+    "gmailSender": {
+        "username": "gap@gmail.com",
+        "password": "Gap@123"
+    },
+    "outlookSender": {
+        "username": "gap@gap.com",
+        "password": ""
+    },
+    "emailFrom": "gap@gap.com",
+        "keyVault": {
+            "tenantId": "348a1296-55b6-466e-a7af-4ad1a1b79713",
+            "clientId": "4fb77891-480d-47b7-a6be-6fb1ab635a4c",
+            "clientSecret": "d46515f6-905d-4975-afd8-d4c29505c684",
+            "vaultName": "g-akv-2p-dta-gdlana-01",
+
+            "dbSecretName": "g-cdb-2p-gdl-mongiapicosmosdbaccount-01",
+            "vaultUrl": "https://g-akv-2p-dta-gdlana-01.vault.azure.net/"
+        },
+    "dagUrl": "",
+    "storage": {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=gsta2pzrsgdlstorage01;AccountKey=YmV26BQw8UGRBrjHeD2z/tX17juH0DhoLKSihvQAdhmcztVCVtVzvIx7gXouWjycrF0FBBwlRQiCBT7zg8bw9A==;EndpointSuffix=core.windows.net",
+        "containerName": "dataengineering"
+    },
+    "baseUrl": {
+        "pythonService": ""
+    },
+    "appPort": 443
+
+}

@@ -1,0 +1,113 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded" style="height: 16vw;">
+                <div class="wrapperDiv">
+                    <div class="overview-row">
+                        <h4 class="label">Overall Readmission Rate</h4>
+                    </div>
+                    <div class="overview-row">
+                        <h4 class="value">{{overallAdmission}}</h4>
+                    </div>
+                    <div class="overview-row">
+                        <p>2 out of every 5 patients treated for diabetes are readmitted
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv" style="display: flex;">
+                    <div style="margin-right: 0.5rem;">
+                        <div class="chart-row margin-padding">
+                            <h4 class="label">Potential Claims ($)</h4>
+                        </div>
+                        <div class="chartSettings" style="display: grid; width: 28vw;">
+                            <span class="dropdownSpan margin-padding">
+                          <label class="axisLabel">Insurance Value</label>
+                          <mat-form-field floatLabel="never" style="width: 238px; margin-top: -0.5rem;">
+                            <span style="padding-left: 0.5rem;" matPrefix>$ &nbsp;</span>
+                            <input matInput type="text" name="insuranceValue" value="" placeholder="Enter Amount" [(ngModel)]="insuranceValue" />
+                            </mat-form-field>
+                            </span>
+                            <span class="dropdownSpan margin-padding">
+                          <label class="axisLabel">Treatment Cost</label>
+                          <mat-form-field floatLabel="never" style="width: 238px; margin-top: -0.5rem;">
+                            <span style="padding-left: 0.5rem;" matPrefix>$ &nbsp;</span>
+                            <input matInput type="text" name="treatmentCost" value="" placeholder="Enter Amount" [(ngModel)]="treatmentCost" />
+                            </mat-form-field>
+                            </span>
+                            <button class="applyButton" (click)="getCost()">Calculate</button>
+                        </div>
+                    </div>
+
+                    <div class="widget overview opaque rounded" style="height: 15.2vw;">
+                        <div class="wrapperDiv">
+                            <div class="overview-row">
+                                <div class="value" style="color: rgba(170,177,196,255); word-break: break-all; font-weight: bold;">{{readmissionCost}}</div>
+                            </div>
+                            <div class="overview-row">
+                                <div class="readmission-value"><span>Total Readmissions:</span> {{totalReadmissions}}</div>
+                            </div>
+                            <div class="overview-row">
+                                <p>In the current sample {{readmissionCost}} will be claimed as part of health plan
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget overview opaque rounded smallchart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Average Time Spent in Hospital</h4>
+                    </div>
+                    <div class="gauge-container">
+                        <div>
+                            <div class="gauge-label">Readmission Time</div>
+                            <ngx-gauge [size]=130 type="arch" [value]="readmissionValue" [thick]="15" cap="round" [label]="gaugeLabel" foregroundColor="rgba(201,105,71,255)" backgroundColor="rgb(247 202 185)">
+                            </ngx-gauge>
+                        </div>
+                        <div>
+                            <div class="gauge-label">Non-Readmission Time</div>
+                            <ngx-gauge [size]=130 type="arch" [value]="nonReadmissionValue" [thick]="15" cap="round" [label]="gaugeLabel" foregroundColor="rgba(128,152,173,255)" backgroundColor="rgba(218,231,230,255)">
+                            </ngx-gauge>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Clicking on this changes the next chart -->
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div style="display: flex;">
+                        <div class="chart-row alert">
+                            <h4 class="label">Readmission Rate by Demographics</h4>
+                        </div>
+                        <div class="chartSettings">
+                            <span class="dropdownSpan">
+                            <label class="axisLabel">Class</label>
+                            <mat-form-field class="chartDropdown" [floatLabel]="'never'">
+                                <mat-select [(ngModel)]="metricSelected" (selectionChange)="changebuMetric($event)">
+                                    <mat-option *ngFor="let metric of buMetrics" [value]="metric">
+                                        {{metric}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                          </span>
+                        </div>
+                    </div>
+                    <br>
+                    <app-bar-chart *ngIf="metricChartReady" [xLabel]='metricSelected' yLabel='Readmission rate' [barChartData]="metricData" [barChartLabels]="metricLabels" [barChartColors]="metricColors" [barChartLegend]=false></app-bar-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

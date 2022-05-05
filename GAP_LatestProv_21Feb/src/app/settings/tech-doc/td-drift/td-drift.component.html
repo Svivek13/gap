@@ -1,0 +1,13 @@
+<!-- <div class="views">
+    <div class="formholder">
+      <div class="formholder-container">
+        <div class="formholder-helps">
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div *ngIf="loader" class="loader-box">
+    <p>Loading...</p>
+  </div>
+  <pdf-viewer [src]="pdfSrc" [render-text]="true"></pdf-viewer>
+  

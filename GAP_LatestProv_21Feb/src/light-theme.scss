@@ -1,0 +1,18 @@
+$bgcolor: #d9dfe1;
+$fontcolor: #4b4846;
+$input-bg: #fff;
+$buttonhover: #f27b50;
+$bordercolor: #33c5df;
+$input-radius: 0.35em;
+$shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.18);
+$widgetbg: #fff;
+$widgetfontcolor: #4b4846;
+$iconfilter: grayscale(100%) brightness(10%);
+$iconfilterhover: saturate(100%);
+$iconpath: "../assets/img/icons/";
+//chart values
+$charttext: #999;
+$chartgrid: lighten($bordercolor, 5%);
+$chartgridhigh: darken($bordercolor, 15%);
+$chartticks: #999;
+$chartselected: #333;

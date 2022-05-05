@@ -1,0 +1,51 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+    	<mj-all font-family="Helvetica, Arial, sans-serif", font-size="16px" />
+  	</mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section background-color="white">
+      <mj-column >
+        <mj-image padding="0px" height="40px" width="100px" align="left" src="cid:mlworks@logo"></mj-image>
+      </mj-column>
+      <mj-column >
+        <mj-image padding="0px" height="50px" width="100px" align="right" src="cid:tredence@logo"></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+
+        
+
+        <mj-text >Hi {{firstName}},</mj-text>
+
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        	<mj-text  align="justify">
+            You are all set, we feel very proud to bring this platform to you. All the best and we will be happy to hear back from you on your feedback about ML Works (you can reply back to this email or share your feedback on the platform).
+        </mj-text>
+        <mj-text>
+          Welcome to Tredence’s ML Works family!
+        </mj-text>
+        
+      </mj-column>
+    </mj-section>
+    
+    <mj-section>
+    	<mj-column>
+        <mj-text>
+          Thank You,
+        </mj-text>
+        <mj-text  >
+          Jai Vardhan Rao
+        </mj-text>
+        <mj-text  >
+          Product Owner, Team MLW
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

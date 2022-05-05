@@ -1,0 +1,202 @@
+{
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "version": 1,
+    "newProjectRoot": "projects",
+    "projects": {
+        "mlops-app": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "",
+            "sourceRoot": "src",
+            "prefix": "app",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "public",
+                        "index": "src/index.html",
+                        "main": "src/main.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "src/favicon",
+                            "src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/svg-country-flags/svg",
+                                "output": "src/assets/svg-country-flags/svg"
+                            }
+                        ],
+                        "styles": [
+                            "src/styles.scss",
+                            "src/theme.scss",
+                            "src/assets/tooltipster-master/dist/css/tooltipster.bundle.min.css",
+                            "src/assets/tooltipster-master/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css"
+                        ],
+                        "scripts": [
+                            "src/assets/tooltipster-master/dist/js/tooltipster.bundle.min.js",
+                            "src/assets/plotly-latest.min.js"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "7kb",
+                                    "maximumError": "80kb"
+                                }
+                            ]
+                        },
+                        "dev": {
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.dev.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "7kb",
+                                    "maximumError": "80kb"
+                                }
+                            ]
+                        },
+                        "qa": {
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.qa.ts"
+                            }],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [{
+                                    "type": "initial",
+                                    "maximumWarning": "5mb",
+                                    "maximumError": "8mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "7kb",
+                                    "maximumError": "80kb"
+                                }
+                            ]
+                        }
+                    }
+                },
+
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "mlops-app:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "mlops-app:build:production"
+                        },
+                        "dev": {
+                            "browserTarget": "mlops-app:build:dev"
+                        },
+                        "qa": {
+                            "browserTarget": "mlops-app:build:qa"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "mlops-app:build"
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "src/test.ts",
+                        "polyfills": "src/polyfills.ts",
+                        "tsConfig": "tsconfig.spec.json",
+                        "karmaConfig": "karma.conf.js",
+                        "assets": [
+                            "src/favicon",
+                            "src/assets"
+                        ],
+                        "styles": [
+                            "src/styles.scss"
+                        ],
+                        "scripts": []
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "tsconfig.app.json",
+                            "tsconfig.spec.json",
+                            "e2e/tsconfig.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**"
+                        ]
+                    }
+                },
+                "e2e": {
+                    "builder": "@angular-devkit/build-angular:protractor",
+                    "options": {
+                        "protractorConfig": "e2e/protractor.conf.js",
+                        "devServerTarget": "mlops-app:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "mlops-app:serve:production"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "defaultProject": "mlops-app",
+    "cli": {
+        "analytics": false
+    },
+    "schematics": {
+        "@schematics/angular:component": {
+            "style": "scss"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+.body {
+    margin: 1em;
+}
+
+.theme-color {
+    color: #F27B50;
+}
+
+.link {
+    color: #F27B50;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.graph {
+    height: 25px;
+    width: 25px;
+    vertical-align: middle;
+}
+
+.video_container {
+    display: flex;
+    justify-content: space-between;
+}

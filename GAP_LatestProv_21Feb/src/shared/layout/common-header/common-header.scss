@@ -1,0 +1,111 @@
+// @import "src/styles.scss";
+.navbar {
+    padding: 0 1vw;
+    background-color: var(--bgcolor);
+    color: #4B4846;
+    font-size: 1.3vw;
+    font-weight: bold;
+}
+
+.navbar-container {
+    border-bottom: 1px solid var(--borderbottomcolor);
+    display: flex;
+}
+
+.navbar .logo {
+    background-position: center center;
+    background-size: 10vw auto;
+    background-image: url(../../../assets/img/ml-works-logo-orange.png);
+    min-width: 10vw;
+    max-width: 10vw;
+    height: 4vw;
+    background-repeat: no-repeat;
+    flex-grow: 0;
+    cursor: pointer;
+}
+
+.navbar .controls {
+    flex-grow: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.navbar .controls-group {
+    display: flex;
+    flex-direction: row;
+    border-left: 1px solid var(--borderbottomcolor);
+    margin: .5em .2vw;
+}
+
+.navbar .controls-group:first-child {
+    border: none;
+}
+
+.navbar .controls-icon {
+    width: 4vw;
+    height: 3vw;
+    background-position: center center;
+    background-size: 3vw 3vw;
+    background-repeat: no-repeat;
+    filter: var(--iconfilter);
+    cursor: pointer;
+    position: relative;
+}
+
+.navbar .controls-icon.user {
+    background-image: url("../../../assets/img/icons/dark/user.png");
+    font-weight: bold;
+    padding-left: 4vw;
+    background-position: .25vw center;
+    width: auto;
+}
+
+.navbar .controls-icon.user h4 {
+    vertical-align: middle;
+    padding: 0.2em;
+    font-size: 0.9em;
+}
+
+.navbar .controls-icon.insight {
+    background-image: url("../../../assets/img/icons/dark/insight.png");
+}
+
+.navbar .controls-icon.overview {
+    background-image: url("../../../assets/img/icons/dark/overview.png");
+}
+
+.navbar .controls-icon.explainability {
+    background-image: url("../../../assets/img/icons/explainability.png");
+    cursor: not-allowed !important;
+}
+
+.navbar .controls-icon.projects {
+    background-image: url("../../../assets/img/icons/dark/projects.png");
+}
+
+.navbar .controls-icon.setup {
+    background-image: url("../../../assets/img/icons/setup.png");
+}
+
+.navbar .controls-icon.help {
+    background-image: url("../../../assets/img/icons/dark/help.png");
+}
+
+.navbar .controls-icon.add {
+    background-image: url("../../../assets/img/icons/addPro.png");
+}
+
+.navbar .controls-icon.tour {
+    background-image: url("../../../assets/img/icons/tour.png");
+}
+
+.navbar .controls-icon.darkmode {
+    background-image: url("../../../assets/img/icons/darkmode.png");
+}
+
+.navbar .controls-icon:hover,
+.navbar .controls-icon.active {
+    filter: grayscale(10%);
+    color: #807b77;
+}

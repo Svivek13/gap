@@ -1,0 +1,370 @@
+<mat-spinner class="spinner" *ngIf="loader"></mat-spinner>
+<div class="disable-background" *ngIf="loader"></div>
+
+<div class="views">
+    <div>
+        <form class="input-group" [formGroup]="modelSearchForm" (ngSubmit)="getExplainability()">
+            <!-- <div>
+                <label>Model Name</label>
+                <div style="display: flex;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Model"
+                        [formControl]="modelSearchForm.get('model')" [matAutocomplete]="auto" />
+                    <mat-autocomplete #auto="matAutocomplete" [panelWidth]="180" (optionSelected)="onSelectionChanged($event)" [displayWith]="displayFnModel">
+                        <mat-option *ngFor="let option of modelOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option.displayText}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon>
+                </div>
+            </div> -->
+            <div>
+                <label>Brand Name</label>
+                <div style="display: flex;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Brand"
+                        [formControl]="modelSearchForm.get('brand')" [matAutocomplete]="auto5" />
+                    <mat-autocomplete #auto5="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnBrand">
+                        <mat-option *ngFor="let option of brandOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+
+            </div>
+            <div *ngIf="model == 'Direct_Mail'">
+                <label>Card</label>
+                <div style="display: flex;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Card"
+                        [formControl]="modelSearchForm.get('card')" [matAutocomplete]="auto4" />
+                    <mat-autocomplete #auto4="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnCard">
+                        <mat-option *ngFor="let option of cardOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option.displayText}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+            </div>
+            <div *ngIf="model != 'Direct_Mail'">
+                <label>Location</label>
+                <div style="display: flex;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Location"
+                        [formControl]="modelSearchForm.get('location')" [matAutocomplete]="auto4" />
+                    <mat-autocomplete #auto4="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnLocation">
+                        <mat-option *ngFor="let option of locationOption" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+            </div>
+            <div *ngIf="model == 'Purchase_Propensity' || model == 'Store_Clustering'">
+                <label>Model Type</label>
+                <div style="display: flex;">
+                    <input appTooltipOnEllipsis matInput type="text" class="search" placeholder="Search Location"
+                        [formControl]="modelSearchForm.get('model_type')" [matAutocomplete]="auto5" />
+                    <mat-autocomplete #auto5="matAutocomplete" [panelWidth]="180" [displayWith]="displayModelType">
+                        <mat-option *ngFor="let option of modelType" [value]="option"
+                            style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <!-- <mat-icon matSuffix class="search-icon" (mouseenter)="onHoverSearchIcon()"
+                        (mouseleave)="onLeaveSearchIcon()" (click)="clearSearch()">{{iconText}}</mat-icon> -->
+                </div>
+            </div>
+            <button mat-raised-button type="submit" color="primary"
+                style="height: 34px;margin-top: 22px">Submit</button>
+        </form>
+    </div>
+    <div class="widget-holder">
+
+        <div class="widget-holder-row" *ngIf="showDMXAI">
+            <div class="widget chart">
+                <div>
+                    <h2 class="colorFont">Probability</h2>
+                </div>
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Global Feature Importance</h4>
+                        <p class="description-chart">Summary of the average contribution of each feature to the overall
+                            model prediction </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartData"
+                        [labels]="globalChartLabels" [colors]="globalColors" xLabel="" yLabel="" [max]="max">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLength"
+                        (prevClickEvent)="showPrevFeatures($event)" (nextClickEvent)="showNextFeatures($event)">
+                    </app-chart-paginator>
+                </div>
+            </div>
+
+            <div class="widget chart">
+                <div>
+                    <h2 class="colorFont">Revenue</h2>
+                </div>
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Global Feature Importance</h4>
+                        <p class="description-chart">Summary of the average contribution of each feature to the overall
+                            model prediction </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataRev"
+                        [labels]="globalChartLabelsRev" [colors]="globalColors" xLabel="" yLabel="" [max]="max1">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthRev"
+                        (prevClickEvent)="showPrevFeaturesRev($event)" (nextClickEvent)="showNextFeaturesRev($event)">
+                    </app-chart-paginator>
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="!showDMXAI">
+            <div class="widget chart">
+
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Global Feature Importance</h4>
+                        <p class="description-chart">Summary of the average contribution of each feature to the overall
+                            model prediction </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartData"
+                        [labels]="globalChartLabels" [colors]="globalColors" xLabel="" yLabel="" [max]="max">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLength"
+                        (prevClickEvent)="showPrevFeatures($event)" (nextClickEvent)="showNextFeatures($event)">
+                    </app-chart-paginator>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="widget-holder" *ngIf="showSegment">
+        <div class="filters" *ngIf="showDMXAI || showPPXAI">
+            <div class="filters-wrapper">
+                <div class="form-control formCls">
+                    <div [formGroup]="formGroupImpRange" style="display:flex">
+                        <div>
+                            <label >Decile Analaysis</label>
+                            <input matInput type="text" class="search" placeholder="Search Attribute"
+                                [formControl]="formGroupImpRange.get('importanceRange')" [matAutocomplete]="auto1" />
+                            <mat-autocomplete #auto1="matAutocomplete" [panelWidth]="180" [displayWith]="displayFnAttr"
+                                (optionSelected)='getRangeXAI($event.option.value)'>
+                                <mat-option *ngFor="let option of importanceRangeOption" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.displayText}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                    </div>
+                    <!-- <ul class="filters-list"> -->
+
+                    <!-- </ul> -->
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="showPPXAI ">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> {{fetureHeading}}
+                        </h4>
+                        <p class="description-chart"> Shows the Feature Importance of the probability model output
+                            Decile Range selected</p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataTopProb"
+                        [labels]="globalChartLabelsTopProb" [colors]="globalColors" xLabel="" yLabel="" [max]="max2">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthTopProb"
+                        (prevClickEvent)="showPrevFeaturesTopProb($event)"
+                        (nextClickEvent)="showNextFeaturesTopProb($event)"></app-chart-paginator>
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="showDMXAI">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> Feature importance for customers with {{selectedRange}} predicted probability
+                        </h4>
+                        <p class="description-chart"> Shows the Feature Importance of the probability model output
+                            Decile Range selected</p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataTopProb"
+                        [labels]="globalChartLabelsTopProb" [colors]="globalColors" xLabel="" yLabel="" [max]="max2">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthTopProb"
+                        (prevClickEvent)="showPrevFeaturesTopProb($event)"
+                        (nextClickEvent)="showNextFeaturesTopProb($event)"></app-chart-paginator>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> Feature importance for customers with {{selectedRange}} predicted revenue
+                        </h4>
+                        <p class="description-chart">Shows the Feature Importance of the revenue model output Decile
+                            Range selected</p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReadyRev" chartName="xai" [datasets]="globalChartDataTopRev"
+                        [labels]="globalChartLabelsTopRev" [colors]="globalColors" xLabel="" yLabel="" [max]="max3">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReadyRev" [modelName]="model" [totalLength]="globalLengthTopRev"
+                        (prevClickEvent)="showPrevFeaturesTopRev($event)"
+                        (nextClickEvent)="showNextFeaturesTopRev($event)"></app-chart-paginator>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="widget-holder" *ngIf="showSegment">
+        <div class="filters" *ngIf="showDMXAI || showPPXAI">
+            <div class="filters-wrapper">
+                <div class="form-control formCls">
+                    <div [formGroup]="formGroupSegment" style="display:flex">
+                        <div >
+                            <label >Segment Option</label>
+                            <input matInput type="text" class="search" placeholder="Search Segment"
+                                [formControl]="formGroupSegment.get('segmentOptionFC')" [matAutocomplete]="auto2" />
+                            <mat-autocomplete #auto2="matAutocomplete" [panelWidth]="180" [displayWith]="displayFn"
+                                (optionSelected)='getSegmentXAI($event.option.value)'>
+                                <mat-option *ngFor="let option of segmentOption" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option.displayText}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                    </div>
+                    <!-- <ul class="filters-list"> -->
+
+                    <!-- </ul> -->
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="showPPXAI">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> Feature importance in different customer segments based on "Source" &
+                            "Customer Life Cycle"</h4>
+                        <p class="description-chart">Source - Retail or Online, Customer Life Cycle - New, Retained or
+                            Reactivated as defined in the table dna.a_customers </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataSegProb"
+                        [labels]="globalChartLabelsSegProb" [colors]="globalColors" xLabel="" yLabel="" [max]="max4">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthSegProb"
+                        (prevClickEvent)="showPrevFeaturesSegProb($event)"
+                        (nextClickEvent)="showNextFeaturesSegProb($event)"></app-chart-paginator>
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="showDMXAI">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> Feature importance in different customer segments based on "Source" &
+                            "Customer Life Cycle"</h4>
+                        <p class="description-chart">Source - Retail or Online, Customer Life Cycle - New, Retained or
+                            Reactivated as defined in the table dna.a_customers </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataSegProb"
+                        [labels]="globalChartLabelsSegProb" [colors]="globalColors" xLabel="" yLabel="" [max]="max4">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthSegProb"
+                        (prevClickEvent)="showPrevFeaturesSegProb($event)"
+                        (nextClickEvent)="showNextFeaturesSegProb($event)"></app-chart-paginator>
+                </div>
+            </div>
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> Feature importance in different customer segments based on "Source" &
+                            "Customer Life Cycle"</h4>
+                        <p class="description-chart">Source - Retail or Online, Customer Life Cycle - New, Retained or
+                            Reactivated as defined in the table dna.a_customers </p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReadyRev" chartName="xai" [datasets]="globalChartDataSegRev"
+                        [labels]="globalChartLabelsSegRev" [colors]="globalColors" xLabel="" yLabel="" [max]="max5">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReadyRev" [modelName]="model" [totalLength]="globalLengthSegRev"
+                        (prevClickEvent)="showPrevFeaturesSegRev($event)"
+                        (nextClickEvent)="showNextFeaturesSegRev($event)"></app-chart-paginator>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="widget-holder" *ngIf="!showDMXAI && !showPPXAI">
+        <div class="filters">
+            <div class="filters-wrapper">
+                <div class="form-control formCls">
+                    <div [formGroup]="formGroupCategory" style="display:flex">
+                        <div >
+                            <label >{{label}}</label>
+                            <input matInput type="text" class="search" placeholder="Search Attribute"
+                                [formControl]="formGroupCategory.get('category')" [matAutocomplete]="auto1" />
+                            <mat-autocomplete #auto1="matAutocomplete" [panelWidth]="180"
+                                (optionSelected)='getCategoryXAI($event.option.value)'>
+                                <mat-option *ngFor="let option of categoryDropdowns" [value]="option"
+                                    style="font-size: 0.8em; border-bottom: 1px solid #A8B8BF;">
+                                    {{option}}
+                                </mat-option>
+
+                            </mat-autocomplete>
+                        </div>
+                    </div>
+                    <!-- <ul class="filters-list"> -->
+
+                    <!-- </ul> -->
+                </div>
+            </div>
+        </div>
+        <div class="widget-holder-row" *ngIf="!showDMXAI && !showPPXAI">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label"> {{fetureHeading}}
+                        </h4>
+                        <p class="description-chart"> {{descriptionCat}}</p>
+                    </div>
+                    <app-horizontal-bar-chart *ngIf="chartReady" chartName="xai" [datasets]="globalChartDataTopProb"
+                        [labels]="globalChartLabelsTopProb" [colors]="globalColors" xLabel="" yLabel="" [max]="max2">
+                    </app-horizontal-bar-chart>
+                    <app-chart-paginator *ngIf="chartReady" [modelName]="model" [totalLength]="globalLengthTopProb"
+                        (prevClickEvent)="showPrevFeaturesTopProb($event)"
+                        (nextClickEvent)="showNextFeaturesTopProb($event)"></app-chart-paginator>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- <div class="widget-holder">
+        <div class="widget-holder-row">
+            <div class="widget chart">
+                <div class="wrapperDiv">
+                    <div class="chart-row">
+                        <h4 class="label">Trial d3 chart</h4>
+                        <p class="description-chart">POC d3</p>
+                    </div>
+                    <app-matrix></app-matrix>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

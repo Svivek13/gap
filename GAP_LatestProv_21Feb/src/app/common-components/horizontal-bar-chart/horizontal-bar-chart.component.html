@@ -1,0 +1,10 @@
+<div style="display: block;" *ngIf="drift">
+    <canvas #chart baseChart width="150" height="110" [datasets]="datasets" [labels]="labels" [options]="horBarChartOptions" [legend]="horBarChartLegend" [colors]="colors" [chartType]="horBarChartType" [plugins]="horBarChartPlugins" (chartClick)="chartClickFunction($event)"></canvas>
+</div>
+
+<div style="display: block;" *ngIf="!drift && !completeness">
+    <canvas #featureChart baseChart width="150" height="50" [datasets]="datasets" [labels]="labels" [options]="horBarChartOptions" [legend]="horBarChartLegend" [colors]="colors" [chartType]="horBarChartType" [plugins]="horBarChartPlugins"></canvas>
+</div>
+<div style="display: block;" *ngIf="completeness">
+    <canvas #featureChart baseChart width="120" height="50" [datasets]="datasets" [labels]="labels" [options]="horBarChartOptions" [legend]="horBarChartLegend" [colors]="colors" [chartType]="horBarChartType" [plugins]="horBarChartPlugins"></canvas>
+</div>
